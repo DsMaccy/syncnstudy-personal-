@@ -23,6 +23,7 @@ div
           label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(ng-model='calendarView', btn-radio="'day'") Day
 
 
+
    .h3
      .text "USERNAME" Calendar
       .h5.
@@ -39,3 +40,6 @@ div
           auto-open="true">
         </mwl-calendar>
 
+    div
+      button.clickable(ng-click="events.push({title: 'New event', type: 'important'})")
+      div(ui-view="editevents@home")
