@@ -1,26 +1,44 @@
 doctype html
-body
-    .container
-        h2(align='center') Profile
-        .row
-            .col-md-12
-                label Avatar:
-        .row
-            .col-md-12
-                img(align='center', alt='Avatar', height='200', width='200', src='http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg')
-        .row
-        form(role='form')
-            .form-group
-                label(for='usr') Name:
-                input#usr.form-control(type='text', placeholder='Kanye West')
-            .form-group
-                label(for='email') Email:
-                input#usr.form-control(type='text', placeholder='kwest@gary.edu')
-            .form-group
-                label University:
-                input#usr.form-control(type='text', placeholder='Gillespie Institute of Technology')
-            .form-group
-                label Major:
-                input#usr.form-control(type='text', placeholder='Computer Swagience')
-        button.btn.btn-primary.btn-md Update
-
+html
+    body
+        .container
+            h2(align='center') Profile
+            .row
+                .col-md-12
+                    label
+                        big Avatar:
+            .row
+                .col-md-12
+                    img(align='center', alt='Avatar', height='200', width='200', src='http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg')
+                .col-md-12
+                    button.btn.btn-info.btn-sm Small
+                    button.btn.btn-info.btn-sm Medium
+                    button.btn.btn-info.btn-sm Large
+            .row
+            form(role='form')
+                .form-group
+                    label(for='usr')
+                        big Image:
+                    input#usr.form-control(type='text', placeholder='Kanye West')
+                    button.btn.btn-info.btn-sm Browse
+                    button.btn.btn-info.btn-sm Upload
+                .row
+                form(role='form')
+                    .form-group
+                        label(for='usr')
+                            big Name:
+                        input#usr.form-control(type='text', placeholder='Kanye West')
+                    .form-group
+                        label(for='email')
+                            big Email:
+                        input#usr.form-control(type='text', placeholder='kwest@gary.edu')
+                    .form-group
+                        label
+                            big University:
+                        input#usr.form-control(type='text', placeholder='Gillespie Institute of Technology')
+                    .form-group
+                        label
+                            big Major:
+                        input#usr.form-control(type='text', placeholder='Computer Swagience')
+                button.btn.btn-primary.btn-lg Update
+                button.btn.btn-primary.btn-lg Cancel
