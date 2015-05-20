@@ -1,6 +1,6 @@
 div
   .h1
-   .text-center  "CURRENT MONTH & YR"
+   .page-header  "CURRENT MONTH & YR"
     .row
       .col-md-6.text-center
         .btn-group
@@ -39,3 +39,33 @@ div
           auto-open="true">
         </mwl-calendar>
 
+
+   .h3#event-editor Edit events
+        button.btn.btn-primary.pull-right(ng-click="events.push({title: 'New event', type: 'important'})") Add new
+
+   table.table.table-bordered
+          thead
+              tr
+                  th Title
+                  th Type
+                  th Starts at
+                  th Ends at
+                  th Remove
+
+   tr.ng-scope(ng-repeat='event in events track by $index')
+          td
+              input.form-control.ng-pristine.ng-untouched.ng-valid(type='text', ng-model='event.title')
+
+          td
+              select.form-control.ng-pristine.ng-untouched.ng-valid(ng-model='event.type')
+                  option(value='important') Important
+
+                  option(value='warning') Warning
+
+                  option(value='info') Info
+
+                  option(value='inverse') Inverse
+
+                  option(value='success') Success
+
+                  option(value='special') Special
