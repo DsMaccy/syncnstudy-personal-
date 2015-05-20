@@ -1,140 +1,74 @@
 body
     .container
         h2 Invites
-        p View/Respond/Accept
-        table.table
-            tbody
-                tr
-                    button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') CSE 110
-                    span.caret
-                    ul.dropdown-menu
-                        .container
-                            .row
-                                .col-md-6
-                                    h3 Search for your class below:
-                                    .input-group.col-md-12
-                                        input.form-control.input-lg(type='text', placeholder='Search for your class...')
-                                        span.input-group-btn
-                                            button.btn.btn-info.btn-lg(type='button')
-                                                i.glyphicon.glyphicon-search
-                            .row
-                                .col-md-6
-                                    table.table.table-condensed
-                                        thread
-                                            tr
-                                                th Course Name
-                                                th Dates
-                                                th Time
-                                                th Add to Schedule
-                                        tbody
-                                            tr
-                                                td CSE 140
-                                                td M/W/F
-                                                td 12-12:50pm
-                                                td
-                                                    button.btn.btn-primary.btn-xs Add
-                                            tr
-                                                td CSE 130
-                                                td M/W/F
-                                                td 3-3:50pm
-                                                td
-                                                    button.btn.btn-primary.btn-xs Add
-                                            tr
-                                                td CSE 110
-                                                td Tu/Th
-                                                td 5-6:20pm
-                                                td
-                                                    button.btn.btn-primary.btn-xs Add
-                            .row
-                                a.btn.btn-info(href='#!/addclass', role='button') Class isn't listed?
-                tr
-                    button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') CSE 140
-                    span.caret
-                    ul.dropdown-menu
-                        .container
-                            .row
-                                .col-md-6
-                                    h3 Search for your class below:
-                                    .input-group.col-md-12
-                                        input.form-control.input-lg(type='text', placeholder='Search for your class...')
-                                        span.input-group-btn
-                                            button.btn.btn-info.btn-lg(type='button')
-                                                i.glyphicon.glyphicon-search
-                            .row
-                                .col-md-6
-                                    table.table.table-condensed
-                                        thread
-                                            tr
-                                                th Course Name
-                                                th Dates
-                                                th Time
-                                                th Add to Schedule
-                                        tbody
-                                            tr
-                                                td CSE 140
-                                                td M/W/F
-                                                td 12-12:50pm
-                                                td
-                                                    button.btn.btn-primary.btn-xs Add
-                                            tr
-                                                td CSE 130
-                                                td M/W/F
-                                                td 3-3:50pm
-                                                td
-                                                    button.btn.btn-primary.btn-xs Add
-                                            tr
-                                                td CSE 110
-                                                td Tu/Th
-                                                td 5-6:20pm
-                                                td
-                                                    button.btn.btn-primary.btn-xs Add
-                            .row
-                                a.btn.btn-info(href='#!/addclass', role='button') Class isn't listed?
-                tr
-                    button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Coffee?
-                    span.caret
-                    ul.dropdown-menu
-                        .container
-                            .row
-                                .col-md-6
-                                    h3 Search for your class below:
-                                    .input-group.col-md-12
-                                        input.form-control.input-lg(type='text', placeholder='Search for your class...')
-                                        span.input-group-btn
-                                            button.btn.btn-info.btn-lg(type='button')
-                                                i.glyphicon.glyphicon-search
-                            .row
-                                .col-md-6
-                                    table.table.table-condensed
-                                        thread
-                                            tr
-                                                th Course Name
-                                                th Dates
-                                                th Time
-                                                th Add to Schedule
-                                        tbody
-                                            tr
-                                                td CSE 140
-                                                td M/W/F
-                                                td 12-12:50pm
-                                                td
-                                                    button.btn.btn-primary.btn-xs Add
-                                            tr
-                                                td CSE 130
-                                                td M/W/F
-                                                td 3-3:50pm
-                                                td
-                                                    button.btn.btn-primary.btn-xs Add
-                                            tr
-                                                td CSE 110
-                                                td Tu/Th
-                                                td 5-6:20pm
-                                                td
-                                                    button.btn.btn-primary.btn-xs Add
-                            .row
-                                a.btn.btn-info(href='#!/addclass', role='button') Class isn't listed?
-
-
-
-
-
+        hr
+        table
+            tr
+                .container
+                h2 CSE 100 Study Group
+                        table
+                            td
+                                .dropdown
+                                    a(href="#", data-toggle="dropdown").dropdown-toggle
+                                        button.btn.btn-primary.btn-block(type='button') View
+                                    ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                        .container
+                                            li From: Timmy Ngo
+                                            li.divider
+                                            li Location: B240
+                                            li Date: October 21, 2015
+                                            li Time: 3:00 p.m.
+                                            li Message: Hey just wanted to start a study group to work on things
+                                            li.divider
+                                            li
+                                                table
+                                                    td
+                                                        button.btn.btn-primary.btn-block(type='button') Accept
+                                                    td
+                                                        button.btn.btn-primary.btn-block(type='button') Decline
+            tr
+                .container
+                h2 CSE 140 Midterm Review
+                        table
+                            td
+                                .dropdown
+                                    a(href="#", data-toggle="dropdown").dropdown-toggle
+                                        button.btn.btn-primary.btn-block(type='button') View
+                                    ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                        .container
+                                            li From: Dylan
+                                            li.divider
+                                            li Location: B270
+                                            li Date: October 23, 2015
+                                            li Time: 6:00 p.m.
+                                            li Message: I'm not even taking this class but okay.
+                                            li.divider
+                                            li
+                                                table
+                                                    td
+                                                        button.btn.btn-primary.btn-block(type='button') Accept
+                                                    td
+                                                        button.btn.btn-primary.btn-block(type='button') Decline
+            tr
+                .container
+                h2 CSE 110 Project
+                        table
+                            td
+                                .dropdown
+                                    a(href="#", data-toggle="dropdown").dropdown-toggle
+                                        button.btn.btn-primary.btn-block(type='button') View
+                                    ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                        .container
+                                            li From: Kevin
+                                            li.divider
+                                            li Location: Geisel
+                                            li Date: October 20, 2015
+                                            li Time: 4:00 p.m.
+                                            li Message: I love this class so much, let's all discuss how much we love it
+                                            li.divider
+                                            li
+                                                table
+                                                    td
+                                                        button.btn.btn-primary.btn-block(type='button') Accept
+                                                    td
+                                                        button.btn.btn-primary.btn-block(type='button') Decline
