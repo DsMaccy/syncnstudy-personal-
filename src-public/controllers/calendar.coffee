@@ -1,6 +1,7 @@
 app.controller 'CalendarCtrl', ($scope, moment) ->
   $scope.calendarView = 'month'
   $scope.calendarDay = new Date()
+  $scope.calendarViewTitle = 'view-T'
   $scope.events = [
     {
       title: 'Event 1'

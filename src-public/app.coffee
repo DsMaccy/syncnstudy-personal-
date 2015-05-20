@@ -86,7 +86,7 @@ app.config (
     url: '/reset_password'
     controller: 'ResetPasswordCtrl'
     templateUrl: 'reset_password.html'
-  .state 'addclass', 
+  .state 'addclass',
     url: '/addclass'
     controller: 'AddClassCtrl'
     templateUrl: 'addclass.html'
