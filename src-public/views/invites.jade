@@ -1,74 +1,152 @@
+doctype html
 body
-    .container
-        h2 Invites
-        hr
-        table
-            tr
-                .container
-                h2 CSE 100 Study Group
-                        table
-                            td
-                                .dropdown
-                                    a(href="#", data-toggle="dropdown").dropdown-toggle
-                                        button.btn.btn-primary.btn-block(type='button') View
-                                    ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
-                                        .container
-                                            li From: Timmy Ngo
-                                            li.divider
-                                            li Location: B240
-                                            li Date: October 21, 2015
-                                            li Time: 3:00 p.m.
-                                            li Message: Hey just wanted to start a study group to work on things
-                                            li.divider
-                                            li
-                                                table
-                                                    td
-                                                        button.btn.btn-primary.btn-block(type='button') Accept
-                                                    td
-                                                        button.btn.btn-primary.btn-block(type='button') Decline
-            tr
-                .container
-                h2 CSE 140 Midterm Review
-                        table
-                            td
-                                .dropdown
-                                    a(href="#", data-toggle="dropdown").dropdown-toggle
-                                        button.btn.btn-primary.btn-block(type='button') View
-                                    ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
-                                        .container
-                                            li From: Dylan
-                                            li.divider
-                                            li Location: B270
-                                            li Date: October 23, 2015
-                                            li Time: 6:00 p.m.
-                                            li Message: I'm not even taking this class but okay.
-                                            li.divider
-                                            li
-                                                table
-                                                    td
-                                                        button.btn.btn-primary.btn-block(type='button') Accept
-                                                    td
-                                                        button.btn.btn-primary.btn-block(type='button') Decline
-            tr
-                .container
-                h2 CSE 110 Project
-                        table
-                            td
-                                .dropdown
-                                    a(href="#", data-toggle="dropdown").dropdown-toggle
-                                        button.btn.btn-primary.btn-block(type='button') View
-                                    ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
-                                        .container
-                                            li From: Kevin
-                                            li.divider
-                                            li Location: Geisel
-                                            li Date: October 20, 2015
-                                            li Time: 4:00 p.m.
-                                            li Message: I love this class so much, let's all discuss how much we love it
-                                            li.divider
-                                            li
-                                                table
-                                                    td
-                                                        button.btn.btn-primary.btn-block(type='button') Accept
-                                                    td
-                                                        button.btn.btn-primary.btn-block(type='button') Decline
+    button.btn.btn-primary.btn-block(type='button') Send New Invite
+    .row
+        .col-md-6
+            .container
+                h2 Pending Invites
+                hr
+                table
+                    tr
+                        .container
+                        h3 CSE 100 Study Group
+                                table
+                                    td
+                                        .dropdown
+                                            a(href="#", data-toggle="dropdown").dropdown-toggle
+                                                button.btn.btn-primary.btn-block(type='button') View
+                                            ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                                .container
+                                                    li From: Timmy Ngo
+                                                    li.divider
+                                                    li Location: B240
+                                                    li Date: October 21, 2015
+                                                    li Time: 3:00 p.m.
+                                                    li Message: Hey just wanted to start a study group to work on things
+                                                    li.divider
+                                                    li
+                                                        table
+                                                            td
+                                                                button.btn.btn-primary.btn-block(type='button') Accept
+                                                            td
+                                                                button.btn.btn-primary.btn-block(type='button') Decline
+                    hr
+                    tr
+                        .container
+                        h3 CSE 140 Midterm Review
+                                table
+                                    td
+                                        .dropdown
+                                            a(href="#", data-toggle="dropdown").dropdown-toggle
+                                                button.btn.btn-primary.btn-block(type='button') View
+                                            ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                                .container
+                                                    li From: Dylan
+                                                    li.divider
+                                                    li Location: B270
+                                                    li Date: October 23, 2015
+                                                    li Time: 6:00 p.m.
+                                                    li Message: I'm not even taking this class but okay.
+                                                    li.divider
+                                                    li
+                                                        table
+                                                            td
+                                                                button.btn.btn-primary.btn-block(type='button') Accept
+                                                            td
+                                                                button.btn.btn-primary.btn-block(type='button') Decline
+                    hr
+                    tr
+                        .container
+                        h3 CSE 110 Project
+                                table
+                                    td
+                                        .dropdown
+                                            a(href="#", data-toggle="dropdown").dropdown-toggle
+                                                button.btn.btn-primary.btn-block(type='button') View
+                                            ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                                .container
+                                                    li From: Kevin
+                                                    li.divider
+                                                    li Location: Geisel
+                                                    li Date: October 20, 2015
+                                                    li Time: 4:00 p.m.
+                                                    li Message: I love this class so much, let's all discuss how much we love it
+                                                    li.divider
+                                                    li
+                                                        table
+                                                            td
+                                                                button.btn.btn-primary.btn-block(type='button') Accept
+                                                            td
+                                                                button.btn.btn-primary.btn-block(type='button') Decline
+
+        .divider
+        .col-md-6
+            .container
+                h2 Accepted Invites
+                hr
+                table
+                    tr
+                        .container
+                        h3 Gary Appreciation and History
+                            table
+                                td
+                                    .dropdown
+                                        a(href="#", data-toggle="dropdown").dropdown-toggle
+                                            button.btn.btn-primary.btn-block(type='button') View
+                                        ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                            .container
+                                                li From: Timmy Ngo
+                                                li.divider
+                                                li Location: B240
+                                                li Date: October 21, 2015
+                                                li Time: 3:00 p.m.
+                                                li Message: Hey just wanted to start a study group to work on things
+                                                li.divider
+                                                li
+                                                    table
+                                                        td
+                                                            button.btn.btn-primary.btn-block(type='button') Delete
+                    hr
+                    tr
+                        .container
+                        h3 Math 20C Review
+                            table
+                                td
+                                    .dropdown
+                                        a(href="#", data-toggle="dropdown").dropdown-toggle
+                                            button.btn.btn-primary.btn-block(type='button') View
+                                        ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                            .container
+                                                li From: Dylan
+                                                li.divider
+                                                li Location: B270
+                                                li Date: October 23, 2015
+                                                li Time: 6:00 p.m.
+                                                li Message: I'm not even taking this class but okay.
+                                                li.divider
+                                                li
+                                                    table
+                                                        td
+                                                            button.btn.btn-primary.btn-block(type='button') Delete
+                    hr
+                    tr
+                        .container
+                        h3 Phil 27
+                            table
+                                td
+                                    .dropdown
+                                        a(href="#", data-toggle="dropdown").dropdown-toggle
+                                            button.btn.btn-primary.btn-block(type='button') View
+                                        ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                            .container
+                                                li From: Kevin
+                                                li.divider
+                                                li Location: Geisel
+                                                li Date: October 20, 2015
+                                                li Time: 4:00 p.m.
+                                                li Message: I love this class so much, let's all discuss how much we love it
+                                                li.divider
+                                                li
+                                                    table
+                                                        td
+                                                            button.btn.btn-primary.btn-block(type='button') Delete

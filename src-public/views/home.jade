@@ -4,11 +4,10 @@
 doctype html
 html(lang="en")
 head
-
 body
-
     div(ng-if="!isAuthenticated()")
       div(ui-view="about@home")
       div(class="bkimg", ui-view="signup@home")
     div(ng-if="!isAuthenticated()")
       div(ui-view="calendar@home")
+

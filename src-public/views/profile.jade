@@ -1,6 +1,9 @@
 doctype html
 html
+    head
+        script(src="profile.coffee")
     body
+
         .container
             h2(align='center') Profile
             .row
@@ -9,11 +12,11 @@ html
                         big Avatar:
             .row
                 .col-md-12
-                    img(align='center', alt='Avatar', height='200', width='200', src='http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg')
+                    img(id='avatarimg' align='center', alt='Avatar', height='200', width='200', src='http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg')
                 .col-md-12
-                    button.btn.btn-info.btn-sm Small
-                    button.btn.btn-info.btn-sm Medium
-                    button.btn.btn-info.btn-sm Large
+                    button.btn.btn-info.btn-sm(onclick='changeSize(200px)') Small
+                    button.btn.btn-info.btn-sm(onclick='changeSize(400px)') Medium
+                    button.btn.btn-info.btn-sm(onclick='changeSize(600px)') Large
             .row
             form(role='form')
                 .form-group
