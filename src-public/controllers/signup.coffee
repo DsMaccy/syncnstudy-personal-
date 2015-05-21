@@ -8,3 +8,4 @@ app.controller 'SignupCtrl', ($scope, $auth, $window) ->
     .catch((response) ->
         $window.location.href = '/'
     )
+z
