@@ -76,10 +76,10 @@ app.config (
     url: '/invites'
     controller: 'InvitesCtrl'
     templateUrl: 'invites.html'
-  .state 'termsandconditions',
-    url: '/termsandconditions'
+  .state 'terms_and_conditions',
+    url: '/terms_and_conditions'
     controller: 'TermsCondCtrl'
-    templateUrl: 'termsandconditions.html'
+    templateUrl: 'terms_and_conditions.html'
   .state 'privacypolicy',
     url: '/privacypolicy'
     controller: 'PrivacyPolicyCtrl'
