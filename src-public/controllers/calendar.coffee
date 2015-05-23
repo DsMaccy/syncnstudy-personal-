@@ -14,6 +14,8 @@ app.controller 'CalendarCtrl', ($scope, moment) ->
       type: 'info'
       startsAt: moment().subtract(1, 'day').toDate()
       endsAt: moment().add(5, 'days').toDate()
+      editable: true
+      deletable: true
     }
     {
       title: 'This is a really long event title'
@@ -22,5 +24,3 @@ app.controller 'CalendarCtrl', ($scope, moment) ->
       endsAt: moment().startOf('day').add(19, 'hours').toDate()
     }
   ]
-
-

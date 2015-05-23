@@ -1,2 +1,76 @@
-div(ui-view="editevents@home")
+//
+   Created by sean on 5/20/2015.
+div
+    .h1
+        .text-center
+            .page-header  "CURRENT MONTH & YR"
+                .row
+                    .col-md-6.text-center
+                        .btn-group
+                            button.btn.btn-primary.ng-isolate-scope(mwl-date-modifier='', date='calendarDay', decrement='calendarView') Previous
 
+                            button.btn.btn-default.ng-isolate-scope(mwl-date-modifier='', date='calendarDay', set-to-today='') Today
+
+                            button.btn.btn-primary.ng-isolate-scope(mwl-date-modifier='', date='calendarDay', increment='calendarView') Next
+
+                    br.visible-xs.visible-sm
+
+                    .col-md-6.text-center
+                        .btn-group
+                            label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(ng-model='calendarView', btn-radio="'year'") Year
+
+                            label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(ng-model='calendarView', btn-radio="'month'") Month
+
+                            label.btn.btn-primary.ng-untouched.ng-valid.active.ng-dirty.ng-valid-parse(ng-model='calendarView', btn-radio="'week'") Week
+
+                            label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(ng-model='calendarView', btn-radio="'day'") Day
+
+.h3
+    .text "USERNAME" Calendar
+        .h5.
+            <mwl-calendar
+              view="calendarView"
+              current-day="calendarDay"
+              events="events"
+              view-title="Calendar"
+              on-event-click="eventClicked(calendarEvent)"
+              edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+              delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+              on-edit-event-click="eventEdited(calendarEvent)"
+              on-delete-event-click="eventDeleted(calendarEvent)"
+              auto-open="true">
+            </mwl-calendar>
+
+h3#event-editor Edit events
+   button.btn.btn-primary.pull-right( ng-click="events.push({title: 'New event', type: 'important', startsAt: '8:00AM'})") Add new
+
+   table.table.table-bordered
+      thead
+         tr
+            th Title
+            th Type
+            th Starts at
+            th Ends at
+            th Remove
+            tbody
+              tr.ng-scope(ng-repeat='event in events track by $index')
+                td
+                  input.form-control.ng-pristine.ng-untouched.ng-valid(type='text', ng-model='event.title')
+                td
+                  select.form-control.ng-pristine.ng-untouched.ng-valid(ng-model='event.type')
+                    option(value='important') Important
+                    option(value='warning') Warning
+                    option(value='info') Info
+                    option(value='inverse') Inverse
+                    option(value='success') Success
+                    option(value='special') Special
+                  td
+                    p.input-group(style='max-width: 250px')
+                        input.form-control.ng-pristine.ng-valid.ng-isolate-scope.ng-valid-date.ng-touched(type='text', readonly='', datepicker-popup='medium', ng-model='event.startsAt', is-open='event.startOpen', close-text='Close')
+
+                  td
+                    p.input-group(style='max-width: 250px')
+                        input.form-control.ng-pristine.ng-untouched.ng-valid.ng-isolate-scope.ng-valid-date(type='text', readonly='', datepicker-popup='medium', ng-model='event.endsAt', is-open='event.endOpen', close-text='Close')
+
+                  td
+                    button.btn.btn-danger(ng-click='events.splice($index, 1)') Delete

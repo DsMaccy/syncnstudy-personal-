@@ -46,18 +46,12 @@ app.config (
       'calendar@home':
         templateUrl: 'calendar.html'
         controller: 'CalendarCtrl',
-      'editevents@home':
-        templateUrl: 'editevents.html'
-        controller: 'EditEventsCtrl'
       'signup@home':
         templateUrl: 'signup.html'
         controller: 'SignupCtrl',
       'about@home':
         templateUrl: 'about.html'
-        controller: 'AboutCtrl',
-      'calendar@home':
-        templateUrl: 'calendar.html'
-        controller: 'CalendarCtrl'
+        controller: 'AboutCtrl'
     }
   }
   .state 'profile',
