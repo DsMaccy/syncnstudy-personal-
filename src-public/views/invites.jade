@@ -1,11 +1,38 @@
 doctype html
 body
-    button.btn.btn-primary.btn-block(type='button') Send New Invite
+    .row
+        .col-md-3
+            .dropdown
+                a(href="#", data-toggle="dropdown").dropdown-toggle
+                    button.btn.btn-primary.btn-block(type='button') Send New Invite
+                ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                    .container-form
+                        .row
+                            .col-md-12
+                                h6 Class:
+                                .input-group.col-sm-12
+                                    input.form-control.input-md(type='text', placeholder='Enter the name of a class')
+                                h6 To:
+                                .input-group.col-sm-12
+                                    input.form-control.input-md(type='text', placeholder='Enter the name of a classmate separated by ","')
+                                h6 Location:
+                                .input-group.col-sm-12
+                                    input.form-control.input-md(type='text', placeholder='Enter a location for the study group')
+                                h6 Date:
+                                .input-group.col-sm-12
+                                    input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
+                                h6 Time:
+                                .input-group.col-sm-12
+                                    input.form-control.input-md(type='text', placeholder='Enter a time e.g. 2:00 p.m.')
+                                h6 Message:
+                                textarea(rows='5', cols='45', name='Message')
+                                .divider
+                                button.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
     .row
         .col-md-6
             .container
                 h2 Pending Invites
-                hr
+                hr(align="left" width="50%")
                 table
                     tr
                         .container
@@ -30,7 +57,7 @@ body
                                                                 button.btn.btn-primary.btn-block(type='button') Accept
                                                             td
                                                                 button.btn.btn-primary.btn-block(type='button') Decline
-                    hr
+                    hr(align="left" width="50%")
                     tr
                         .container
                         h3 CSE 140 Midterm Review
@@ -54,7 +81,7 @@ body
                                                                 button.btn.btn-primary.btn-block(type='button') Accept
                                                             td
                                                                 button.btn.btn-primary.btn-block(type='button') Decline
-                    hr
+                    hr(align="left" width="50%")
                     tr
                         .container
                         h3 CSE 110 Project
@@ -78,12 +105,10 @@ body
                                                                 button.btn.btn-primary.btn-block(type='button') Accept
                                                             td
                                                                 button.btn.btn-primary.btn-block(type='button') Decline
-
-        .divider
         .col-md-6
             .container
                 h2 Accepted Invites
-                hr
+                hr(align="left" width="50%")
                 table
                     tr
                         .container
@@ -106,7 +131,7 @@ body
                                                     table
                                                         td
                                                             button.btn.btn-primary.btn-block(type='button') Delete
-                    hr
+                    hr(align="left" width="50%")
                     tr
                         .container
                         h3 Math 20C Review
@@ -128,7 +153,7 @@ body
                                                     table
                                                         td
                                                             button.btn.btn-primary.btn-block(type='button') Delete
-                    hr
+                    hr(align="left" width="50%")
                     tr
                         .container
                         h3 Phil 27
