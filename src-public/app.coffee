@@ -79,7 +79,7 @@ app.config (
   .state 'termsandconditions',
     url: '/termsandconditions'
     controller: 'TermsCondCtrl'
-    templateUrl: 'termsandconditions.html'
+    templateUrl: 'terms_and_conditions.html'
   .state 'privacypolicy',
     url: '/privacypolicy'
     controller: 'PrivacyPolicyCtrl'

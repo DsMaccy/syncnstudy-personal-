@@ -5,43 +5,46 @@ html
     body
 
         .container
-            h2(align='center') Profile
+            h2(align='center')
+                b Profile
             .row
                 .col-md-12
                     label
                         big Avatar:
             .row
                 .col-md-12
-                    img(id='avatarimg' align='center', alt='Avatar', height='200', width='200', src='http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg')
+                    img(id='avatarimg', align='center', alt='Avatar', height='200', width='200', src='http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg')
                 .col-md-12
-                    button.btn.btn-info.btn-sm(onclick='changeSize(200px)') Small
-                    button.btn.btn-info.btn-sm(onclick='changeSize(400px)') Medium
-                    button.btn.btn-info.btn-sm(onclick='changeSize(600px)') Large
+                    button.btn.btn-info.btn-sm(onclick='changeSize(200)') Small
+                    button.btn.btn-info.btn-sm(onclick='changeSize(350)') Medium
+                    button.btn.btn-info.btn-sm(onclick='changeSize(500)') Large
             .row
             form(role='form')
                 .form-group
-                    label(for='usr')
-                        big Image:
-                    input#usr.form-control(type='text', placeholder='Kanye West')
-                    button.btn.btn-info.btn-sm Browse
-                    button.btn.btn-info.btn-sm Upload
+                    label(for='img')
+                        input#imgFile.btn.btn-default.btn-info.btn-sm(type='file' accept='image/*' onchange="uploadImage()")
+                        //button#viewButton.btn.btn-default.btn-info.btn-sm(onclick='uploadImage()') View
+                    //    big Image:
+                    //input#img.form-control(type='text', placeholder='Kanye West')
+                    //button#img.btn.btn-info.btn-sm(onclick='searchImage()') Browse
+                    //button.btn.btn-info.btn-sm Upload
                 .row
                 form(role='form')
                     .form-group
                         label(for='usr')
                             big Name:
-                        input#usr.form-control(type='text', placeholder='Kanye West')
+                        input#name.form-control(type='text', placeholder='Kanye West')
                     .form-group
-                        label(for='email')
+                        label(for='usr')
                             big Email:
-                        input#usr.form-control(type='text', placeholder='kwest@gary.edu')
+                        input#email.form-control(type='text', placeholder='kwest@gary.edu')
                     .form-group
                         label
                             big University:
-                        input#usr.form-control(type='text', placeholder='Gillespie Institute of Technology')
+                        input#uni.form-control(type='text', placeholder='Gillespie Institute of Technology')
                     .form-group
                         label
                             big Major:
-                        input#usr.form-control(type='text', placeholder='Computer Swagience')
-                button.btn.btn-primary.btn-lg Update
-                button.btn.btn-primary.btn-lg Cancel
+                        input#maj.form-control(type='text', placeholder='Computer Swagience')
+                button.btn.btn-primary.btn-lg(onclick='updateAccInfo()') Update
+                button.btn.btn-primary.btn-lg.pull-right(onclick='resetInfo()') Reset
