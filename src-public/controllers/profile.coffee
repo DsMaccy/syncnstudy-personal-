@@ -19,12 +19,10 @@ uploadImage = () ->
 
   uploadedFile = new FileReader()
 
-  console.log(uploadedFile)
   uploadedFile.onload = (e)->
     document.getElementById("avatarimg").setAttribute('src', e.target.result)
 
   uploadedFile.readAsDataURL(document.getElementById('imgFile').files[0])
-  document.getElementById('avatarimg').setAttribute("src", uploadedFile.target.result)
 
 
 
@@ -77,41 +75,43 @@ validateImageFile = () ->
 # Check if the file name is for an image file
 isImageFile = (name) ->
   name = name.toLowerCase()
-  if name.contains('.jpe')
+  name = name.substr(name.lastIndexOf('.'))
+
+  if name == '.jpe'
     return true
-  if name.contains('.jpg')
+  if name == '.jpg'
     return true
-  if name.contains('.jpeg')
+  if name == '.jpeg'
     return true
-  if name.contains('.gif')
+  if name == '.gif'
     return true
-  if name.contains('.png')
+  if name == '.png'
     return true
-  if name.contains('.bmp')
+  if name == '.bmp'
     return true
-  if name.contains('.ico')
+  if name == '.ico'
     return true
-  if name.contains('.svg')
+  if name == '.svg'
     return true
-  if name.contains('.svgz')
+  if name == '.svgz'
     return true
-  if name.contains('.tif')
+  if name == '.tif'
     return true
-  if name.contains('.tiff')
+  if name == '.tiff'
     return true
-  if name.contains('.ai')
+  if name == '.ai'
     return true
-  if name.contains('.drw')
+  if name == '.drw'
     return true
-  if name.contains('.pct')
+  if name == '.pct'
     return true
-  if name.contains('.psp')
+  if name == '.psp'
     return true
-  if name.contains('.xcf')
+  if name == '.xcf'
     return true
-  if name.contains('.psd')
+  if name == '.psd'
     return true
-  if name.contains('.raw')
+  if name == '.raw'
     return true
   return false
 
