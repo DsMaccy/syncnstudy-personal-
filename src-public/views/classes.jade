@@ -87,7 +87,45 @@ body
                                             .divider
                                             button.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
         .row
-             .dropdown
+            .container
+                .row
+                    h3 Search for your class below:
+                    .input-group
+                        input.form-control.input-lg(type='text', placeholder='Search for your class...')
+                        span.input-group-btn
+                            button.btn.btn-info.btn-lg(type='button')
+                                i.glyphicon.glyphicon-search
+                .row
+                    table.table.table-condensed
+                        thread
+                            tr
+                                th Course Name
+                                th Dates
+                                th Time
+                                th Add to Schedule
+                        tbody
+                            tr
+                                td CSE 140
+                                td M/W/F
+                                td 12-12:50pm
+                                td
+                                    button.btn.btn-primary.btn-xs Add
+                            tr
+                                td CSE 130
+                                td M/W/F
+                                td 3-3:50pm
+                                td
+                                    button.btn.btn-primary.btn-xs Add
+                            tr
+                                td CSE 110
+                                td Tu/Th
+                                td 5-6:20pm
+                                td
+                                    button.btn.btn-primary.btn-xs Add
+                .row
+                    a.btn.btn-info(href='#!/addclass', role='button') Class isn't listed?
+
+            //.dropdown
                  button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Add Class
                  span.caret
                  ul.dropdown-menu
