@@ -23,4 +23,3 @@ var parseAdaptor = module.exports = function(Parse) {
     });
   };
 };
-
