@@ -19,7 +19,6 @@ app.config (
   $stateProvider
   $urlRouterProvider
   $authProvider
-  ParseProvider
 ) ->
 
   $locationProvider.hashPrefix '!'
@@ -33,10 +32,6 @@ app.config (
     url: '/logout'
     controller: 'LogoutCtrl'
     templateUrl: 'home.html'
-  .state 'task',
-    url: '/task'
-    controller: 'TaskCtrl'
-    templateUrl: 'task.html'
   .state 'home', {
     url: '/'
     views: {
@@ -88,11 +83,6 @@ app.config (
     templateUrl: 'addclass.html'
 
   $urlRouterProvider.otherwise '/'
-
-  ParseProvider.initialize(
-    "H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth", # Application ID
-    "ZKYUey7Kir4adRsIEfPFzlUtrh2FwwjC3dfT8yNB"  # REST API Key
-  )
 
   $authProvider.google(
     clientId: '893059616848-cut5s8vmq30stksu1k96fssu20gtcoq8.apps.googleusercontent.com'

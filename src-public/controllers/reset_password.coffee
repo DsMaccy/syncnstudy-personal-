@@ -1,11 +1,3 @@
-app.controller 'ResetPasswordCtrl', ($scope, $auth, $window, Parse) ->
+app.controller 'ResetPasswordCtrl', ($scope, $auth, $window, Test) ->
   $scope.resetPassword = ->
-    $window.location.href = '/'
-    Parse.User.resetPassword($scope.email,
-      success: ->
-        $window.location.href = '/'
-      error: ->
-    ).then(
-      ->
-        $window.location.href = '/'
-    )
+    $window.location.href = '#!/'
