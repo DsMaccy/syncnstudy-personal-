@@ -1,4 +1,6 @@
 app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
+  $scope.token = $auth.getToken()
+  $scope.monsters = ""
   $scope.email = ""
   $scope.calendarView = 'month'
   $scope.calendarDay = new Date()
@@ -32,3 +34,63 @@ app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
     }
   ]
 
+  init = ->
+    Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
+    Parse.User.logIn('ga@yahoo.com','123').then (
+      success: (user) ->
+          $scope.email = Parse.User.current().username
+          return
+      error: (error) ->
+          $scope.email = "fail"
+          return
+      )
+
+    Task = Parse.Object.extend('Task', {
+        someEvent: ->
+          @get('strength') > 18
+        initialize: (attrs, options) ->
+          @sound = 'Rawr'
+          return
+
+      }, spawn: (event) ->
+      task = new Task
+      task.set 'strength', event
+      task
+    )
+    Task = Parse.Object.extend('Task')
+    query = new (Parse.Query)(Task)
+    query.get 'CI5Hk3NuG8',
+      success: (random) ->
+        $scope.random = Parse.Task()
+        return
+      error: (object, error) ->
+        # The object was not retrieved successfully.
+        # error is a Parse.Error with an error code and message.
+        return
+
+    #$scope.email = Parse.User.current().username
+
+    ###Things = Parse.Object.extend('Things')
+    thang = new Things()
+    thang.set('hello', 'world')
+    thang.save()
+    ParseSDK.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
+
+    query = ParseSDK.Query("Task")
+    query.equalTo("title", "fsd")
+    query.first().then (result) ->
+      $scope.monsters = result
+      return
+
+    ParseSDK.User.logIn('ga@yahoo.com', '123', {useMasterKey: true}).then ((user) ->
+        $scope.email = user.username
+        return
+      ), (error) ->
+        # the save failed.
+        return
+
+    ParseSDK.User.become($auth.getToken(),{useMasterKey: false}).then ((user) ->
+        $scope.email = user.email
+        return
+      )###
+  init()

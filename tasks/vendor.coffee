@@ -21,6 +21,8 @@ gulp.task 'vendor', (done) ->
     'bower_components/angular-stra/dist/js/angular-bootstrap-calendar-tpls.min.js'
     'bower_components/angular-animate/angular-animate.js'
     'bower_components/parse-angular-sdk/dist/parse-angular-sdk.js'
+    'bower_components/parse-angular-patch/dist/parse-angular.js'
+    'bower_components/parse-js-sdk/lib/parse.min.js'
   ]
   .pipe(concat('vendor.js'))
   .on 'error', gutil.log

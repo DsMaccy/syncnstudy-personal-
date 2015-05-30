@@ -122,3 +122,8 @@ isImageFile = (name) ->
     return true
   return false
 
+  init = ->
+    Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
+    $scope.name = Parse.User.current()
+    return
+  init()

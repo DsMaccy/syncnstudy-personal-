@@ -12,6 +12,8 @@ app = angular.module 'angularParseBoilerplate', [
   'satellizer'
   'mgcrea.ngStrap'
   'mwl.calendar'
+  'parse-angular'
+  'parse-angular.enhance'
 ]
 
 app.config (
