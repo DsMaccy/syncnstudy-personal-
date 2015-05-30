@@ -1,129 +1,169 @@
 body
-    .container
-        .row
-            h2 My Classes
-            p Select Class to Send Invite
-            table.table
-                tbody
-                    tr
-                        .dropdown
-                            a(href="#", data-toggle="dropdown").dropdown-toggle
-                                button.btn.btn-primary.btn-block(type='button') CSE 100
-                            ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
-                                .container-form
-                                    .row
-                                        .col-md-12
-                                            h6 Class:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='CSE 100')
-                                            h6 To:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter the name of a classmate separated by ","')
-                                            h6 Location:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter a location for the study group')
-                                            h6 Date:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
-                                            h6 Time:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter a time e.g. 2:00 p.m.')
-                                            h6 Message:
-                                            textarea(rows='5', cols='45', name='Message')
-                                            .divider
-                                            button.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
-                    tr
-                        .dropdown
-                            a(href="#", data-toggle="dropdown").dropdown-toggle
-                                button.btn.btn-primary.btn-block(type='button') CSE 105
-                            ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
-                                .container-form
-                                    .row
-                                        .col-md-12
-                                            h6 Class:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='CSE 105')
-                                            h6 To:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter the name of a classmate separated by ","')
-                                            h6 Location:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter a location for the study group')
-                                            h6 Date:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
-                                            h6 Time:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter a time e.g. 2:00 p.m.')
-                                            h6 Message:
-                                            textarea(rows='5', cols='45', name='Message')
-                                            .divider
-                                            button.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
-                    tr
-                        .dropdown
-                            a(href="#", data-toggle="dropdown").dropdown-toggle
-                                button.btn.btn-primary.btn-block(type='button') CSE 110
-                            ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
-                                .container-form
-                                    .row
-                                        .col-md-12
-                                            h6 Class:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='CSE 110')
-                                            h6 To:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter the name of a classmate separated by ","')
-                                            h6 Location:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter a location for the study group')
-                                            h6 Date:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
-                                            h6 Time:
-                                            .input-group.col-sm-12
-                                                input.form-control.input-md(type='text', placeholder='Enter a time e.g. 2:00 p.m.')
-                                            h6 Message:
-                                            textarea(rows='5', cols='45', name='Message')
-                                            .divider
-                                            button.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
-        .row
-            .container
-                .row
-                    h3 Search for your class below:
-                    .input-group
-                        input.form-control.input-lg(type='text', placeholder='Search for your class...')
-                        span.input-group-btn
-                            button.btn.btn-info.btn-lg(type='button')
-                                i.glyphicon.glyphicon-search
-                .row
-                    table.table.table-condensed
-                        thread
-                            tr
-                                th Course Name
-                                th Dates
-                                th Time
-                                th Add to Schedule
-                        tbody
-                            tr
-                                td CSE 140
-                                td M/W/F
-                                td 12-12:50pm
-                                td
-                                    button.btn.btn-primary.btn-xs Add
-                            tr
-                                td CSE 130
-                                td M/W/F
-                                td 3-3:50pm
-                                td
-                                    button.btn.btn-primary.btn-xs Add
-                            tr
-                                td CSE 110
-                                td Tu/Th
-                                td 5-6:20pm
-                                td
-                                    button.btn.btn-primary.btn-xs Add
-                .row
-                    a.btn.btn-info(href='#!/addclass', role='button') Class isn't listed?
+    #page1
+        .container
+            .row
+                h2 My Classes
+                p Select Class to Send Invite
+                table.table
+                    tbody
+                        tr
+                            .dropdown
+                                a(href="#", data-toggle="dropdown").dropdown-toggle
+                                    button.btn.btn-primary.btn-block(type='button') CSE 100
+                                ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                    .container-formill
+                                        .row
+                                            .col-md-12
+                                                h6 Class:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='CSE 100')
+                                                h6 To:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter the name of a classmate separated by ","')
+                                                h6 Location:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter a location for the study group')
+                                                h6 Date:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
+                                                h6 Time:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter a time e.g. 2:00 p.m.')
+                                                h6 Message:
+                                                textarea(rows='5', cols='45', name='Message')
+                                                .divider
+                                                button.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
+                        tr
+                            .dropdown
+                                a(href="#", data-toggle="dropdown").dropdown-toggle
+                                    button.btn.btn-primary.btn-block(type='button') CSE 105
+                                ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                    .container-form
+                                        .row
+                                            .col-md-12
+                                                h6 Class:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='CSE 105')
+                                                h6 To:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter the name of a classmate separated by ","')
+                                                h6 Location:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter a location for the study group')
+                                                h6 Date:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
+                                                h6 Time:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter a time e.g. 2:00 p.m.')
+                                                h6 Message:
+                                                textarea(rows='5', cols='45', name='Message')
+                                                .divider
+                                                button.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
+                        tr
+                            .dropdown
+                                a(href="#", data-toggle="dropdown").dropdown-toggle
+                                    button.btn.btn-primary.btn-block(type='button') CSE 110
+                                ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
+                                    .container-form
+                                        .row
+                                            .col-md-12
+                                                h6 Class:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='CSE 110')
+                                                h6 To:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter the name of a classmate separated by ","')
+                                                h6 Location:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter a location for the study group')
+                                                h6 Date:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
+                                                h6 Time:
+                                                .input-group.col-sm-12
+                                                    input.form-control.input-md(type='text', placeholder='Enter a time e.g. 2:00 p.m.')
+                                                h6 Message:
+                                                textarea(rows='5', cols='45', name='Message')
+                                                .divider
+                                                button.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
+                        tr
+                            #lastclass
+                        tr
+                            p#demo
+            .row
+                .container
+                    .row
+                        h3 Search for your class below:
+                        .input-group
+                            input.form-control.input-lg(type='text', placeholder='Search for your class...')
+                            span.input-group-btn
+                                button.btn.btn-info.btn-lg(type='button')
+                                    i.glyphicon.glyphicon-search
+                    .row
+                        table.table.table-condensed
+                            thread
+                                tr
+                                    th Course Name
+                                    th Dates
+                                    th Time
+                                    th Students
+                                    th Add to Schedule
+                            tbody
+                                tr
+                                    td CSE 140
+                                    td M/W/F
+                                    td 12-12:50pm
+                                    td
+                                        p#cse140 0
+                                    td
+                                        button.btn.btn-primary.btn-xs(onclick='addClass()') Add
+                                tr
+                                    td CSE 130
+                                    td M/W/F
+                                    td 3-3:50pm
+                                    td
+                                        button.btn.btn-primary.btn-xs Add
+                                tr
+                                    td CSE 110
+                                    td Tu/Th
+                                    td 5-6:20pm
+                                    td
+                                        button.btn.btn-primary.btn-xs Add
+            .row
+                a.btn.btn-info(onclick='toggle1()', role='button') Class isn't listed?
+    #page2(style='display:none')
+        .container
+            .row
+                .col-md-12
+                    h1 Add New Class
+            .row
+                .col-md-12
+                    h3 University
+                    input#university.form-control.input-lg(type='text', placeholder='UCSD')
+            .row
+                .col-md-12
+                    h3 Course Abbreviation (Department Course Number)
+                    input#course.form-control.input-lg(type='text', placeholder='CSE 134B')
+            .row
+                .col-md-12
+                    h3 Quarter/Semester (Season Year)
+                    input#quarter.form-control.input-lg(type='text', placeholder='Spring 2015')
+            .row
+                .col-md-12
+                    h3 Days of Week M/Tu/W/Th/F
+                    input#days.form-control.input-lg(type='text', placeholder='M/W/F')
+            .row
+                .col-md-12
+                    h3 Time (make sure to include am or pm!)
+                    input#classtime.form-control.input-lg(type='text', placeholder='12pm-12:50pm')
+
+
+
+            .row
+                .col-md-12
+                    a.btn.btn-primary.btn-md(onclick='toggle2()') Confirm Add
+
 
             //.dropdown
                  button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Add Class
