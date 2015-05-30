@@ -48,7 +48,11 @@ app.post('/auth/signup', (req, res) ->
 
 app.post('/auth/login', (req, res) ->
   Parse.User.logIn(req.body.email, req.body.password).then((user) ->
-    res.send(token: user.getSessionToken())
+    res.send(
+      token: user.getSessionToken()
+      userThing: user
+      test: 'test'
+    )
   , (error) ->
     res.render('signup', flash: error.messsage)
   )
