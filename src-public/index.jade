@@ -18,9 +18,10 @@ html(lang="en", ng-app="angularParseBoilerplate")
           i(class="ion-ios7-pulse-strong") SyncNStudy
       ul(class="nav navbar-nav")
         li(ng-if="isAuthenticated()")
-          a(ui-sref = "profile") Profile
-        li(ng-if="isAuthenticated()")
           a(ui-sref = "classes") Classes
+        li(ng-if="isAuthenticated()")
+          a(ui-sref = "invites") Invites
+
         li(ng-if="isAuthenicated()")
       ul(ng-if="!isAuthenticated()" class="nav navbar-nav pull-right")
         li
@@ -32,7 +33,7 @@ html(lang="en", ng-app="angularParseBoilerplate")
           a(ui-sref="logout") Logout
       ul(ng-if="isAuthenticated()" class="nav navbar-nav pull-right")
         li
-          a(ui-sref="invites") Invites
+          a(ui-sref = "profile") Profile
     
     main.container(ui-view)
 
