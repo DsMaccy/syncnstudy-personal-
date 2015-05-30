@@ -43,7 +43,7 @@ app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
           $scope.email = "fail"
           return
       )
-    $scope.email = Parse.User.current()
+    $scope.email = Parse.User.current().username
     ###
     Things = Parse.Object.extend('Things')
     thang = new Things()
