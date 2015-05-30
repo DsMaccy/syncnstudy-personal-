@@ -36,6 +36,8 @@ app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
 
   init = ->
     Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
+    Parse.User.become($auth.getToken())
+    ###
     Parse.User.logIn('ga@yahoo.com','123').then (
       success: (user) ->
           $scope.email = Parse.User.current().username
@@ -43,34 +45,12 @@ app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
       error: (error) ->
           $scope.email = "fail"
           return
-      )
 
-    Task = Parse.Object.extend('Task', {
-        someEvent: ->
-          @get('strength') > 18
-        initialize: (attrs, options) ->
-          @sound = 'Rawr'
-          return
-
-      }, spawn: (event) ->
-      task = new Task
-      task.set 'strength', event
-      task
-    )
-    Task = Parse.Object.extend('Task')
-    query = new (Parse.Query)(Task)
-    query.get 'CI5Hk3NuG8',
-      success: (random) ->
-        $scope.random = Parse.Task()
-        return
-      error: (object, error) ->
-        # The object was not retrieved successfully.
-        # error is a Parse.Error with an error code and message.
-        return
-
-    #$scope.email = Parse.User.current().username
-
-    ###Things = Parse.Object.extend('Things')
+      )###
+    $scope.email = Parse.User.current().getUsername()
+    ###
+    Things = Parse.Object.extend('Things')
+>>>>>>> 56de076531cbf40895d21d3506d68f00d1f920d8
     thang = new Things()
     thang.set('hello', 'world')
     thang.save()
