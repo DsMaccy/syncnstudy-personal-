@@ -1,13 +1,13 @@
 {
     "applications": {
         "SyncNStudy": {
-            "applicationId": "H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth", 
+            "applicationId": "H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth",
             "masterKey": "MLo3r9N24x5DL27afsNtj3d3sMlyL5xA6xb6Bgfz"
-        }, 
+        },
         "_default": {
             "link": "SyncNStudy"
         }
-    }, 
+    },
     "global": {
         "parseVersion": "1.4.2"
     }

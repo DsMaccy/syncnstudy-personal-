@@ -1,4 +1,5 @@
-app.controller 'CalendarCtrl', ($scope, moment) ->
+app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
+  $scope.email = ""
   $scope.calendarView = 'month'
   $scope.calendarDay = new Date()
   $scope.calendarViewTitle = 'view-T'
@@ -10,8 +11,6 @@ app.controller 'CalendarCtrl', ($scope, moment) ->
       type: 'warning'
       startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate()
       endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate()
-
-
     }
     {
       title: 'Event 2'
@@ -32,3 +31,4 @@ app.controller 'CalendarCtrl', ($scope, moment) ->
       endsAt: moment().startOf('day').add(19, 'hours').toDate()
     }
   ]
+
