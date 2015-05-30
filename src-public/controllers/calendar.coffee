@@ -1,4 +1,6 @@
 app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
+  $scope.token = $auth.getToken()
+  $scope.monsters = ""
   $scope.email = ""
   $scope.calendarView = 'month'
   $scope.calendarDay = new Date()
@@ -33,8 +35,22 @@ app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
   ]
   init = ->
     ParseSDK.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
+    ###
+    query = ParseSDK.Query("Task")
+    query.equalTo("title", "fsd")
+    query.first().then (result) ->
+      $scope.monsters = result
+      return
+
+    ParseSDK.User.logIn('ga@yahoo.com', '123', {useMasterKey: true}).then ((user) ->
+        $scope.email = user.username
+        return
+      ), (error) ->
+        # the save failed.
+        return
+
     ParseSDK.User.become($auth.getToken(),{useMasterKey: false}).then ((user) ->
         $scope.email = user.email
         return
-      )
+      )###
   init()

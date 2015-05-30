@@ -19,6 +19,7 @@ gulp.task 'vendor', (done) ->
     'bower_components/satellizer/satellizer.min.js'
     'bower_components/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js'
     'bower_components/parse-angular-sdk/dist/parse-angular-sdk.js'
+    'bower_components/parse-angular-patch/dist/parse-angular.js'
   ]
   .pipe(concat('vendor.js'))
   .on 'error', gutil.log
