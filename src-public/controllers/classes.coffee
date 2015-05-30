@@ -32,7 +32,9 @@ toggle2= () ->
   newClass.numStudents = 1;
   alert "You just added #{courseName} and there is #{newClass.numStudents} student(s)."
 
-addClass= () ->
-  #document.body.insertAdjacentHTML( 'lastclass', 'button.btn.btn-primary.btn-block CSE 140');
-  document.getElementById("lastclass").innerHTML = 'button.btn.btn-primary.btn-block CSE 140';
 
+addClass= () ->
+  # #document.body.insertAdjacentHTML( 'lastclass', 'button.btn.btn-primary.btn-block CSE 140');
+  # document.getElementById("lastclass").innerHTML = 'button.btn.btn-primary.btn-block CSE 140';
+  tvalue = document.getElementById("cse140");
+  tvalue.value++;
