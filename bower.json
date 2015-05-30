@@ -20,7 +20,9 @@
     "body-parser": "https://github.com/expressjs/body-parser.git",
     "morgan": "https://github.com/expressjs/morgan.git",
     "angular-bootstrap-calendar": "https://github.com/mattlewis92/angular-bootstrap-calendar.git",
-    "parse-angular-sdk": "https://github.com/brandid/parse-angular-sdk.git"
+    "parse-angular-sdk": "https://github.com/brandid/parse-angular-sdk.git",
+    "parse-angular-patch": "https://github.com/brandid/parse-angular-patch.git",
+    "parse-js-sdk": "https://github.com/albemuth/parse-js-sdk.git"
   },
   "resolutions": {
     "angular": ">= 1.1.5",

@@ -1,10 +1,11 @@
-app.controller 'LoginCtrl', ($scope, $auth, $window, $alert) ->
+app.controller 'LoginCtrl', ($scope, $auth, $window, $alert, $rootScope) ->
   $scope.login = ->
     $auth.login(
       email: $scope.email
       password: $scope.password
     )
     .catch((response) ->
+        $rootScope.user = response.data.userThing
         $window.location.href = '/'
     )
   $scope.authenticate = (provider) ->
