@@ -35,7 +35,7 @@ div
               view-title="Calendar"
               on-event-click="eventClicked(calendarEvent)"
               edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
-              delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+              delete-event-html="'<i class=\'glyphicon mglyphicon-remove\'></i>'"
               on-edit-event-click="eventEdited(calendarEvent)"
               on-delete-event-click="eventDeleted(calendarEvent)"
               auto-open="true">
@@ -48,6 +48,8 @@ h3#event-editor Edit events
       thead
          tr
             th Title
+            th Location
+            th Message
             th Type
             th Starts at
             th Ends at
@@ -57,6 +59,10 @@ h3#event-editor Edit events
                 td
                   input.form-control.ng-pristine.ng-untouched.ng-valid(type='text', ng-model='event.title')
                 td
+                  input.form-control.ng-pristine.ng-untouched.ng-valid(type='text', ng-model='event.location')
+                td
+                  input.form-control.ng-pristine.ng-untouched.ng-valid(type='text', ng-model='event.message')
+                td
                   select.form-control.ng-pristine.ng-untouched.ng-valid(ng-model='event.type')
                     option(value='important') Important
                     option(value='warning') Warning
@@ -64,13 +70,20 @@ h3#event-editor Edit events
                     option(value='inverse') Inverse
                     option(value='success') Success
                     option(value='special') Special
-                  td
-                    p.input-group(style='max-width: 250px')
-                        input.form-control.ng-pristine.ng-valid.ng-isolate-scope.ng-valid-date.ng-touched(type='text', readonly='', datepicker-popup='medium', ng-model='event.startsAt', is-open='event.startOpen', close-text='Close')
+                td
+                  p.input-group(style='max-width: 250px')
+                    input.form-control(type='text', readonly='', datepicker-popup='medium', ng-model='event.startsAt', is-open='event.startOpen', close-text='Close')
+                    span.input-group-btn
+                      button.btn.btn-default(type='button', ng-click="toggle($event, 'startOpen', event)")
+                        i.glyphicon.glyphicon-calendar
+                  timepicker(ng-model='event.startsAt', hour-step='1', minute-step='15', show-meridian='true')
+                td
+                  p.input-group(style='max-width: 250px')
+                    input.form-control(type='text', readonly='', datepicker-popup='medium', ng-model='event.endsAt', is-open='event.endOpen', close-text='Close')
+                    span.input-group-btn
+                      button.btn.btn-default(type='button', ng-click="toggle($event, 'endOpen', event)")
+                        i.glyphicon.glyphicon-calendar
+                  timepicker(ng-model='event.endsAt', hour-step='1', minute-step='15', show-meridian='true')
+                td
+                  button.btn.btn-danger(ng-click='events.splice($index, 1)') Delete
 
-                  td
-                    p.input-group(style='max-width: 250px')
-                        input.form-control.ng-pristine.ng-untouched.ng-valid.ng-isolate-scope.ng-valid-date(type='text', readonly='', datepicker-popup='medium', ng-model='event.endsAt', is-open='event.endOpen', close-text='Close')
-
-                  td
-                    button.btn.btn-danger(ng-click='events.splice($index, 1)') Delete

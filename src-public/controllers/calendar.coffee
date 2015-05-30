@@ -32,3 +32,4 @@ app.controller 'CalendarCtrl', ($scope, moment) ->
       endsAt: moment().startOf('day').add(19, 'hours').toDate()
     }
   ]
+
