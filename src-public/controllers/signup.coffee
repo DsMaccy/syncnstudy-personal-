@@ -5,6 +5,23 @@ app.controller 'SignupCtrl', ($scope, $auth, $window) ->
       email: $scope.email,
       password: $scope.password
     )
+    .then((response) ->
+      $auth.setToken(response.data.token)
+      Parse.User.become(response.data.token)
+      $window.location.href = '/'
+      $alert(
+        content: 'You have successfully signed up'
+        animation: 'fadeZoomFadeDown'
+        type: 'material'
+        duration: 3
+      )
+    )
     .catch((response) ->
-        $window.location.href = '/'
+        $alert(
+          content: response.data.message
+          animation: 'fadeZoomFadeDown'
+          type: 'material'
+          duration: 3
+        )
+        $window.location.href = '#!/signup'
     )

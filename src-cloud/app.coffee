@@ -34,27 +34,25 @@ app.use express.bodyParser() # Middleware for reading request body
 app.post('/auth/signup', (req, res) ->
     username = req.body.email
     password = req.body.password
+    name = req.body.displayName
 
     user = new Parse.User()
     user.set('username', username)
     user.set('password', password)
+    user.set('name', name)
 
     user.signUp().then((user) ->
         res.send(token: user.getSessionToken())
     , (error) ->
-        res.render('signup', flash: error.messsage)
+        res.status(401).send(message: 'Signup unsuccessful')
     )
 )
 
 app.post('/auth/login', (req, res) ->
   Parse.User.logIn(req.body.email, req.body.password).then((user) ->
-    res.send(
-      token: user.getSessionToken()
-      userThing: user
-      test: 'test'
-    )
+    res.send(token: user.getSessionToken())
   , (error) ->
-    res.render('signup', flash: error.messsage)
+    res.status(401).send(message: 'Invalid Username or Password')
   )
 )
 

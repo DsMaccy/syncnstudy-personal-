@@ -1,4 +1,5 @@
 app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
+  $scope.name = ""
   $scope.token = $auth.getToken()
   $scope.email = ""
   $scope.calendarView = 'month'
@@ -35,13 +36,9 @@ app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
 
 
   init = ->
-    Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
-    Parse.User.become($auth.getToken())
-
     $scope.email = Parse.User.current().getUsername()
+    $scope.name = Parse.User.current().get('name')
     #Parse.User.become($auth.getToken())
     #$scope.name = Parse.User.current().getName()
 
   init()
-
-

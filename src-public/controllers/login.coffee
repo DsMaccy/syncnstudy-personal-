@@ -1,12 +1,28 @@
-app.controller 'LoginCtrl', ($scope, $auth, $window, $alert, $rootScope) ->
+app.controller 'LoginCtrl', ($scope, $auth, $window, $alert, User) ->
   $scope.login = ->
     $auth.login(
       email: $scope.email
       password: $scope.password
     )
+    .then((response) ->
+      $auth.setToken(response.data.token)
+      Parse.User.become(response.data.token)
+      $window.location.href = '/'
+      $alert(
+        content: 'You have successfully logged in'
+        animation: 'fadeZoomFadeDown'
+        type: 'material'
+        duration: 3
+      )
+    )
     .catch((response) ->
-        $rootScope.user = response.data.userThing
-        $window.location.href = '/'
+        $alert(
+          content: response.data.message
+          animation: 'fadeZoomFadeDown'
+          type: 'material'
+          duration: 3
+        )
+        $window.location.href = '#!/login'
     )
   $scope.authenticate = (provider) ->
     $auth.authenticate(provider)
