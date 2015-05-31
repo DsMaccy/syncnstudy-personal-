@@ -11,7 +11,7 @@ body
                                 a(href="#", data-toggle="dropdown").dropdown-toggle
                                     button.btn.btn-primary.btn-block(type='button') CSE 100
                                 ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
-                                    .container-formill
+                                    .container-form
                                         .row
                                             .col-md-12
                                                 h6 Class:
@@ -140,23 +140,23 @@ body
             .row
                 .col-md-12
                     h3 University
-                    input#university.form-control.input-lg(type='text', placeholder='UCSD')
+                    input#university.form-control.input-lg(type='text', placeholder='UCSD', required)
             .row
                 .col-md-12
-                    h3 Course Abbreviation (Department Course Number)
-                    input#course.form-control.input-lg(type='text', placeholder='CSE 134B')
+                    h3 Course Abbreviation (DepartmentCourse Number)
+                    input#course.form-control.input-lg(type='text', placeholder='CSE134B', required)
             .row
                 .col-md-12
                     h3 Quarter/Semester (Season Year)
-                    input#quarter.form-control.input-lg(type='text', placeholder='Spring 2015')
+                    input#quarter.form-control.input-lg(type='text', placeholder='Spring 2015', required)
             .row
                 .col-md-12
                     h3 Days of Week M/Tu/W/Th/F
-                    input#days.form-control.input-lg(type='text', placeholder='M/W/F')
+                    input#days.form-control.input-lg(type='text', placeholder='M/W/F', required)
             .row
                 .col-md-12
                     h3 Time (make sure to include am or pm!)
-                    input#classtime.form-control.input-lg(type='text', placeholder='12pm-12:50pm')
+                    input#classtime.form-control.input-lg(type='text', placeholder='12pm-12:50pm', required)
 
 
 

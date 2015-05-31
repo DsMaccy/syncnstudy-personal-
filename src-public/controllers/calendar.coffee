@@ -36,38 +36,5 @@ app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
   init = ->
     Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
     Parse.User.become($auth.getToken())
-    ###
-    Parse.User.logIn('ga@yahoo.com','123').then (
-      success: (user) ->
-          $scope.email = "test"
-          return
-      error: (error) ->
-          $scope.email = "fail"
-          return
-      )###
     $scope.email = Parse.User.current().getUsername()
-    ###
-    Things = Parse.Object.extend('Things')
-    thang = new Things()
-    thang.set('hello', 'world')
-    thang.save()###
-    ParseSDK.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
-    ###
-    query = ParseSDK.Query("Task")
-    query.equalTo("title", "fsd")
-    query.first().then (result) ->
-      $scope.monsters = result
-      return
-
-    ParseSDK.User.logIn('ga@yahoo.com', '123', {useMasterKey: true}).then ((user) ->
-        $scope.email = user.username
-        return
-      ), (error) ->
-        # the save failed.
-        return
-
-    ParseSDK.User.become($auth.getToken(),{useMasterKey: false}).then ((user) ->
-        $scope.email = user.email
-        return
-      )###
   init()

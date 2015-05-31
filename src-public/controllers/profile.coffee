@@ -1,5 +1,7 @@
 app.controller "ProfileCtrl", ($scope,$auth) ->
 
+
+
 changeSize = undefined
 resetInfo = undefined
 updateAccInfo = undefined
@@ -39,6 +41,11 @@ resetInfo = () ->
   document.getElementById('maj').value = ""
   document.getElementById('email').value = ""
 
+  User = Parse.User.current();
+  query = new Parse.Query(User);
+  console.log(query.get("username"))
+
+
 # Pushes changes to parse
 updateAccInfo = () ->
   imgValidationCheck = validateImageFile()
@@ -46,11 +53,11 @@ updateAccInfo = () ->
     window.alert(imgValidationCheck) # Create Popup
     return
   ###
-    document.getElementById('img').value
-    document.getElementById('name').value
-    document.getElementById('uni').value
-    document.getElementById('maj').value
-    document.getElementById('email').value
+  document.getElementById('img').value
+  document.getElementById('name').value
+  document.getElementById('uni').value
+  document.getElementById('maj').value
+  document.getElementById('email').value
   ###
 
 # Returns empty_string if the image file is valid
