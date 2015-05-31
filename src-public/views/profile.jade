@@ -15,9 +15,15 @@ html
                 .col-md-12
                     img(id='avatarimg', align='center', alt='Avatar', height='200', width='200', src='http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg')
                 .col-md-12
-                    button.btn.btn-info.btn-sm(onclick='changeSize(200)') Small
-                    button.btn.btn-info.btn-sm(onclick='changeSize(350)') Medium
-                    button.btn.btn-info.btn-sm(onclick='changeSize(500)') Large
+                    .btn-group-lg-pic
+                        label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(200)') Small
+
+                        label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(350)') Medium
+
+                        label.btn.btn-primary.ng-untouched.ng-valid.active.ng-dirty.ng-valid-parse(onclick='changeSize(500)') Large
+                    //button.btn.btn-info.btn-sm(onclick='changeSize(200)') Small
+                    //button.btn.btn-info.btn-sm(onclick='changeSize(350)') Medium
+                    //button.btn.btn-info.btn-sm(onclick='changeSize(500)') Large
             .row
             form(role='form')
                 .form-group
