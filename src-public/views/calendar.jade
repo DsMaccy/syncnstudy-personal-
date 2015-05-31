@@ -3,7 +3,7 @@
 div
     .h1
         .text-center
-            .page-header  "CURRENT MONTH & YR"
+            .page-header {{calendarDay}} "CURRENT MONTH & YR"
                 .row
                     .col-md-6.text-center
                         .btn-group
@@ -86,4 +86,3 @@ h3#event-editor Edit events
                   timepicker(ng-model='event.endsAt', hour-step='1', minute-step='15', show-meridian='true')
                 td
                   button.btn.btn-danger(ng-click='events.splice($index, 1)') Delete
-
