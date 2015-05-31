@@ -2,8 +2,8 @@ app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
   $scope.token = $auth.getToken()
   $scope.email = ""
   $scope.calendarView = 'month'
-  $scope.calendarDay = new Date()
-  $scope.calendarViewTitle = 'view-T'
+  $scope.calendarDay = new Date().toDateString()
+  $scope.calendarViewTitle = ''
   $scope.events = [
     {
       title: 'Event 1'
