@@ -1,13 +1,44 @@
-app.controller "ProfileCtrl", ($scope,$auth) ->
-
-
-
 changeSize = undefined
 resetInfo = undefined
 updateAccInfo = undefined
 validateImageFile = undefined
 isImageFile = undefined
 uploadImage = undefined
+current = undefined
+updatePlaceHolders = undefined
+updateParse = undefined
+resetAttr = undefined
+
+
+updatePlaceHolders = (ParseAttr, PageAttr) ->
+  if current.get(ParseAttr)
+    document.getElementById(PageAttr).setAttribute('placeholder', current.get(ParseAttr))
+  return
+
+resetAttr = (PageAttr) ->
+  document.getElementById(PageAttr).value = ""
+  return
+
+###
+init = () ->
+  Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
+  return
+###
+
+app.controller "ProfileCtrl", ($scope,$auth) ->
+  #init()
+  Parse.User.become($auth.getToken())
+  current = Parse.User.current()
+  if current.get('name')
+    console.log(document.getElementById('title').innerHTML)
+    string1 = "Hello "
+    document.getElementById('title').innerHTML = string1.concat(current.get('name'))
+
+  document.getElementById('email').innerHTML = current.get('username')
+
+  updatePlaceHolders()
+
+
 
 # Changes the image of the avatar to the uploaded file WITHOUT pushing the file to parse
 uploadImage = () ->
@@ -39,7 +70,7 @@ resetInfo = () ->
   document.getElementById('name').value = ""
   document.getElementById('uni').value = ""
   document.getElementById('maj').value = ""
-  document.getElementById('email').value = ""
+  document.getElementById('imgFile').value = ""
 
   User = Parse.User.current();
   query = new Parse.Query(User);
@@ -52,13 +83,8 @@ updateAccInfo = () ->
   if imgValidationCheck != ""
     window.alert(imgValidationCheck) # Create Popup
     return
-  ###
-  document.getElementById('img').value
-  document.getElementById('name').value
-  document.getElementById('uni').value
-  document.getElementById('maj').value
-  document.getElementById('email').value
-  ###
+  updateParse()
+
 
 # Returns empty_string if the image file is valid
 validateImageFile = () ->
@@ -71,6 +97,8 @@ validateImageFile = () ->
   if !inFile.files
     return ""
   file = inFile.files[0]
+  if !file
+    return ""
   console.log(file.name)
   console.log(file.size)
   if file.size > 3000000
@@ -122,8 +150,63 @@ isImageFile = (name) ->
     return true
   return false
 
-  init = ->
-    Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
-    $scope.name = Parse.User.current()
-    return
-  init()
+
+
+updatePlaceHolders = () ->
+  if current.get('name')
+    document.getElementById('name').setAttribute('placeholder', current.get('name'))
+  if current.get('university')
+    document.getElementById('uni').setAttribute('placeholder', current.get('university'))
+  if current.get('major')
+    document.getElementById('maj').setAttribute('placeholder', current.get('major'))
+  if current.get('avatar')
+    document.getElementById('imgFile').setAttribute('placeholder', current.get('avatar'))
+  return
+
+
+updateParse = () ->
+  if document.getElementById('name').value
+    Parse.User.current().set('name', document.getElementById('name').value,
+      {
+        success: (currentUsr) ->
+          updatePlaceHolders('name', 'name')
+          console.log(current.get('name'))
+        error: (currentUsr, error) ->
+          console.log("There was an issue updating the information")
+      })
+  if document.getElementById('uni').value
+    Parse.User.current().set('university', document.getElementById('name').value,
+      {
+        success: (currentUsr) ->
+          updatePlaceHolders('university', 'uni')
+          console.log(current.get('university'))
+        error: (currentUsr, error) ->
+          console.log("There was an issue updating the information")
+      })
+  if document.getElementById('maj').value
+    Parse.User.current().set('major', document.getElementById('maj').value,
+      {
+        success: (currentUsr) ->
+          updatePlaceHolders('major', 'maj')
+          console.log(current.get('major'))
+        error: (currentUsr, error) ->
+          console.log("There was an issue updating the information")
+      })
+  if document.getElementById('imgFile').value
+    Parse.User.current().set('avatar', document.getElementById('avatarimg').value,
+      {
+        error: (currentUsr, error) ->
+          console.log("There was an issue updating the information")
+      })
+
+  # TODO: Add the save for "AboutME" and
+  current.save(null,
+    {
+      success: (currentUsr) ->
+        resetInfo()
+        console.log(current.get('name'))
+      error: (currentUsr, error) ->
+        console.log("There was an issue saving the data to the server.  We apologize for the inconvenience :(")
+    })
+
+  current = Parse.User.current()

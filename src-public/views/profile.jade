@@ -2,25 +2,29 @@ doctype html
 html
     head
         script(src="profile.coffee")
+        stylesheet(href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+        script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
     body
 
         .container
             h2(align='center')
-                b Profile
+                label#title Hello
             .row
-                .col-md-12
+                .col-md-12.center-block
                     label
                         big Avatar:
+                    label
+                        big About Me:
             .row
                 .col-md-12
                     img(id='avatarimg', align='center', alt='Avatar', height='200', width='200', src='http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg')
                 .col-md-12
                     .btn-group-lg-pic
                         label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(200)') Small
-
                         label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(350)') Medium
-
-                        label.btn.btn-primary.ng-untouched.ng-valid.active.ng-dirty.ng-valid-parse(onclick='changeSize(500)') Large
+                        label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(500)') Large
+                        //label.btn.btn-primary.ng-untouched.ng-valid.active.ng-dirty.ng-valid-parse(onclick='changeSize(500)') Large
                     //button.btn.btn-info.btn-sm(onclick='changeSize(200)') Small
                     //button.btn.btn-info.btn-sm(onclick='changeSize(350)') Medium
                     //button.btn.btn-info.btn-sm(onclick='changeSize(500)') Large
@@ -38,7 +42,7 @@ html
                     .form-group
                         label(for='usr')
                             big Email:
-                        input#email.form-control(type='text', placeholder='kwest@gary.edu')
+                        label#email.form-control(type='text', placeholder='kwest@gary.edu') kwest@gary.edu
                     .form-group
                         label
                             big University:
@@ -47,5 +51,11 @@ html
                         label
                             big Major:
                         input#maj.form-control(type='text', placeholder='Computer Swagience')
+                    .form-group
+                        label
+                            big About Me:&#160
+                        label
+                            small 24O max characters
+                        textarea#about.form-control(rows="4" maxlength='240')
                 button.btn.btn-primary.btn-lg(onclick='updateAccInfo()') Update
                 button.btn.btn-primary.btn-lg.pull-right(onclick='resetInfo()') Reset

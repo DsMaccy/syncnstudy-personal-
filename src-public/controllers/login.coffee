@@ -7,6 +7,11 @@ app.controller 'LoginCtrl', ($scope, $auth, $window, $alert, User) ->
     .then((response) ->
       $auth.setToken(response.data.token)
       Parse.User.become(response.data.token)
+
+      ##
+      console.log(response.data.token)
+      ##
+
       $window.location.href = '/'
       $alert(
         content: 'You have successfully logged in'
