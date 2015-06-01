@@ -1,4 +1,5 @@
 changeSize = undefined
+changeTitle = undefined
 resetInfo = undefined
 updateAccInfo = undefined
 validateImageFile = undefined
@@ -19,22 +20,23 @@ resetAttr = (PageAttr) ->
   document.getElementById(PageAttr).value = ""
   return
 
-###
+
 init = () ->
   Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
+  Parse.User.enableRevocableSession()
   return
-###
+
 
 app.controller "ProfileCtrl", ($scope,$auth) ->
-  #init()
+  init()
   Parse.User.become($auth.getToken())
   current = Parse.User.current()
-  if current.get('name')
-    console.log(document.getElementById('title').innerHTML)
-    string1 = "Hello "
-    document.getElementById('title').innerHTML = string1.concat(current.get('name'))
+  changeTitle(current.get('name'))
 
   document.getElementById('email').innerHTML = current.get('username')
+  if !current.get('university')
+    current.set('university', 'University of California, San Diego')
+  document.getElementById('uni').innerHTML = current.get('university')
 
   updatePlaceHolders()
 
@@ -68,13 +70,10 @@ changeSize = (pxSize) ->
 resetInfo = () ->
   document.getElementById('avatarimg').setAttribute('src',"http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg")
   document.getElementById('name').value = ""
-  document.getElementById('uni').value = ""
+  #document.getElementById('uni').value = ""
   document.getElementById('maj').value = ""
   document.getElementById('imgFile').value = ""
-
-  User = Parse.User.current();
-  query = new Parse.Query(User);
-  console.log(query.get("username"))
+  document.getElementById('about').value = ""
 
 
 # Pushes changes to parse
@@ -99,8 +98,6 @@ validateImageFile = () ->
   file = inFile.files[0]
   if !file
     return ""
-  console.log(file.name)
-  console.log(file.size)
   if file.size > 3000000
     return "File too Large"
   if !isImageFile(file.name)
@@ -150,17 +147,25 @@ isImageFile = (name) ->
     return true
   return false
 
+changeTitle = (name) ->
+  if name
+    string1 = "Hello "
+    document.getElementById('title').innerHTML = string1.concat(name)
+  else
+    document.getElementById('title').innerHTML = "Hello"
 
 
 updatePlaceHolders = () ->
   if current.get('name')
     document.getElementById('name').setAttribute('placeholder', current.get('name'))
-  if current.get('university')
-    document.getElementById('uni').setAttribute('placeholder', current.get('university'))
+  #if current.get('university')
+  #  document.getElementById('uni').setAttribute('placeholder', current.get('university'))
   if current.get('major')
     document.getElementById('maj').setAttribute('placeholder', current.get('major'))
   if current.get('avatar')
     document.getElementById('imgFile').setAttribute('placeholder', current.get('avatar'))
+  if (current.get('AboutMe'))
+    document.getElementById('about').setAttribute('placeholder', current.get('AboutMe'))
   return
 
 
@@ -175,7 +180,7 @@ updateParse = () ->
           console.log("There was an issue updating the information")
       })
   if document.getElementById('uni').value
-    Parse.User.current().set('university', document.getElementById('name').value,
+    Parse.User.current().set('university', 'University of California, San Diego',
       {
         success: (currentUsr) ->
           updatePlaceHolders('university', 'uni')
@@ -198,15 +203,23 @@ updateParse = () ->
         error: (currentUsr, error) ->
           console.log("There was an issue updating the information")
       })
+  if document.getElementById('about').value
+    Parse.User.current().set('AboutMe', document.getElementById('about').value,
+      {
+        error: (currentUsr, error) ->
+          console.log("There was an issue updating the information")
+      })
 
   # TODO: Add the save for "AboutME" and
   current.save(null,
     {
       success: (currentUsr) ->
         resetInfo()
-        console.log(current.get('name'))
+        changeTitle(current.get('name'))
+        updatePlaceHolders()
       error: (currentUsr, error) ->
         console.log("There was an issue saving the data to the server.  We apologize for the inconvenience :(")
+        console.log(error)
     })
 
   current = Parse.User.current()
