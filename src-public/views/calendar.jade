@@ -1,5 +1,7 @@
 //
    Created by sean on 5/20/2015.
+
+link(rel='stylesheet', href='bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css')
 div
     .h1
         .text-center
@@ -26,7 +28,7 @@ div
                             label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(ng-model='calendarView', btn-radio="'day'") Day
 
 .h3
-    .text {{name}} Contact: {{email}}
+    .text {{name}}
         .h5.
             <mwl-calendar
               view="calendarView"
@@ -34,11 +36,15 @@ div
               events="events"
               view-title="Calendar"
               on-event-click="eventClicked(calendarEvent)"
-              edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
-              delete-event-html="'<i class=\'glyphicon mglyphicon-remove\'></i>'"
+              edit-event-html="'<i class=\'fa fa-pencil\'></i>'"
+              delete-event-html="'<i class=\'fa fa-remove\'></i>'"
               on-edit-event-click="eventEdited(calendarEvent)"
               on-delete-event-click="eventDeleted(calendarEvent)"
-              auto-open="true">
+              auto-open="true"
+              day-view-start="06:00"
+              day-view-end="22:00"
+              day-view-split="30"
+              class="ng-isolate-scope">
             </mwl-calendar>
 
 h3#event-editor Edit events
@@ -48,7 +54,7 @@ h3#event-editor Edit events
       thead
          tr
             th Title
-            th Location
+            th Location/Class
             th Message
             th Type
             th Starts at
@@ -75,14 +81,14 @@ h3#event-editor Edit events
                     input.form-control(type='text', readonly='', datepicker-popup='medium', ng-model='event.startsAt', is-open='event.startOpen', close-text='Close')
                     span.input-group-btn
                       button.btn.btn-default(type='button', ng-click="toggle($event, 'startOpen', event)")
-                        i.glyphicon.glyphicon-calendar
+                        i.fa.fa-calendar.fa-lg
                   timepicker(ng-model='event.startsAt', hour-step='1', minute-step='15', show-meridian='true')
                 td
                   p.input-group(style='max-width: 250px')
                     input.form-control(type='text', readonly='', datepicker-popup='medium', ng-model='event.endsAt', is-open='event.endOpen', close-text='Close')
                     span.input-group-btn
                       button.btn.btn-default(type='button', ng-click="toggle($event, 'endOpen', event)")
-                        i.glyphicon.glyphicon-calendar
+                        i.fa.fa-calendar.fa-lg
                   timepicker(ng-model='event.endsAt', hour-step='1', minute-step='15', show-meridian='true')
                 td
                   button.btn.btn-danger(ng-click='events.splice($index, 1)') Delete

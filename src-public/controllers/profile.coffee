@@ -10,8 +10,6 @@ updatePlaceHolders = undefined
 updateParse = undefined
 resetAttr = undefined
 #defaultImgURL = 'http://jeanbaptiste.bayle.free.fr/AVATAR/grey_default_avatar1234375017_opensalon.jpg'
-#document.getElementById('updateButton').style.paddingBottom = document.getElementById('updateButton').style.height
-#document.getElementById('resetButton').style.paddingBottom = document.getElementById('resetButton').style.height
 
 
 updatePlaceHolders = (ParseAttr, PageAttr) ->
@@ -23,15 +21,14 @@ resetAttr = (PageAttr) ->
   document.getElementById(PageAttr).value = ""
   return
 
-###
 init = () ->
   Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
   Parse.User.enableRevocableSession()
   return
-###
+
 
 app.controller "ProfileCtrl", ($scope,$auth) ->
-  #init()
+  init()
   Parse.User.become($auth.getToken())
   current = Parse.User.current()
   changeTitle(current.get('name'))
@@ -90,7 +87,7 @@ updateAccInfo = () ->
 
 # Returns empty_string if the image file is valid
 validateImageFile = () ->
-  # Check if web browser has file reading capabilities
+# Check if web browser has file reading capabilities
   if !window.FileReader
     return "Web Browser cannot Read Files"
 
@@ -201,12 +198,14 @@ updateParse = () ->
         error: (currentUsr, error) ->
           console.log("There was an issue updating the information")
       })
+    ###
   if document.getElementById('imgFile').value
     Parse.User.current().set('avatar', document.getElementById('avatarimg').value,
       {
         error: (currentUsr, error) ->
           console.log("There was an issue updating the information")
       })
+###
   if document.getElementById('about').value
     Parse.User.current().set('AboutMe', document.getElementById('about').value,
       {

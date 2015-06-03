@@ -1,4 +1,4 @@
-app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
+app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment, ParseSDK) ->
   $scope.name = ""
   $scope.token = $auth.getToken()
   $scope.email = ""
@@ -37,8 +37,43 @@ app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
 
   init = ->
     $scope.email = Parse.User.current().getUsername()
-    $scope.name = Parse.User.current().get('name')
+    #$scope.name = Parse.User.current().get('name')
     #Parse.User.become($auth.getToken())
     #$scope.name = Parse.User.current().getName()
 
   init()
+
+  showModal = undefined
+
+  showModal = (action, event) ->
+    $modal.open
+      templateUrl: 'modalContent.html'
+      controller: ($scope, $modalInstance) ->
+        $scope.$modalInstance = $modalInstance
+        $scope.action = action
+        $scope.event = event
+        return
+    return
+
+
+  $scope.eventClicked = (event) ->
+    #showModal 'Clicked', event
+    showModal = prompt(events)
+    if person != null
+      document.getElementById('Clicked').innerHTML = 'Hello ' + person + '! How are you today?'
+    return
+
+  $scope.eventEdited = (event) ->
+    showModal 'Edited', event
+    return
+
+  $scope.eventDeleted = (event) ->
+    showModal 'Deleted', event
+    return
+
+  $scope.toggle = ($event, field, event) ->
+    $event.preventDefault()
+    $event.stopPropagation()
+    event[field] = !event[field]
+    return
+

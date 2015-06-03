@@ -1,43 +1,47 @@
 doctype html
 html(lang="en", ng-app="angularParseBoilerplate")
+    head
+        title SyncNStudy
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        link(rel="stylesheet", href="css/app.css")
+        script(src="js/vendor.js")
+        script(src="js/templates.js")
+        script(src="js/app.js")
+    body
+        div(ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top")
+            .navbar-header
+                a(class="navbar-brand" ui-sref="home")
+                    i(class="ion-ios7-pulse-strong") SyncNStudy
+            ul(class="nav navbar-nav")
+                li(ng-if="isAuthenticated()")
+                    a(ui-sref = "classes") Classes
+                //li(ng-if="isAuthenticated()")
+                    a(ui-sref = "invites") Invites
+                li(class="dropdown", ng-if="isAuthenticated()")
+                    a.dropdown-toggle(data-toggle="dropdown") Invites
+                        b.caret
+                    ul.dropdown-menu
+                        li
+                            a(ui-sref="invites") Invite Notifications
+                        li
+                            a(ui-sref="new_study_invite") Send Study Invite
+                        li
+                            a(ui-sref="new_requirement") Send Class Event
 
-  head
-    title SyncNStudy 
-    meta(charset="utf-8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1")
-    link(rel="stylesheet", href="css/app.css")
-      
-    script(src="js/vendor.js")
-    script(src="js/templates.js")
-    script(src="js/app.js")
-  
-  body
-    div(ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top")
-      .navbar-header
-        a(class="navbar-brand" ui-sref="home")
-          i(class="ion-ios7-pulse-strong") SyncNStudy
-      ul(class="nav navbar-nav")
-        li(ng-if="isAuthenticated()")
-          a(ui-sref = "classes") Classes
-        li(ng-if="isAuthenticated()")
-          a(ui-sref = "invites") Invites
-
-        li(ng-if="isAuthenicated()")
-      ul(ng-if="!isAuthenticated()" class="nav navbar-nav pull-right")
-        li
-          a(ui-sref="login") Login
-        li
-          a(ui-sref="signup") Sign up
-      ul(ng-if="isAuthenticated()" class="nav navbar-nav pull-right")
-        li
-          a(ui-sref="logout") Logout
-      ul(ng-if="isAuthenticated()" class="nav navbar-nav pull-right")
-        li
-          a(ui-sref = "profile") Profile
-    
-    main.container(ui-view)
-
-    
-    script (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-38757134-3', 'auto');
-    script ( src="/bower_components/angular-animate/angular-animate.js")
+                    li(ng-if="isAuthenicated()")
+            ul(ng-if="!isAuthenticated()" class="nav navbar-nav pull-right")
+                li
+                    a(ui-sref="login") Login
+                li
+                    a(ui-sref="signup") Sign up
+            ul(ng-if="isAuthenticated()" class="nav navbar-nav pull-right")
+                li
+                    a(ui-sref="logout") Logout
+            ul(ng-if="isAuthenticated()" class="nav navbar-nav pull-right")
+                li
+                    a(ui-sref = "profile") Profile
+        main.container(ui-view)
+        script (function (i, s, o, g, r, a, m) {i['GoogleAnalyticsObject'] = r;i[r] = i[r] || function () {(i[r].q = i[r].q || []).push(arguments)}, i[r].l = 1 * new Date();a = s.createElement(o), m = s.getElementsByTagName(o)[0];a.async = 1;a.src = g;m.parentNode.insertBefore(a, m)})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');ga('create', 'UA-38757134-3', 'auto');
+        script ( src = "/bower_components/angular-animate/angular-animate.js")
