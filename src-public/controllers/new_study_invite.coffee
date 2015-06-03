@@ -8,7 +8,7 @@ fillClassDropDown = () ->
   addDropDown classObj for classObj in classArray
 
 fillTimeDropDown = () ->
-  console.log('MOTHA FUCKA')
+  #console.log('MOTHA FUCKA')
   i = 1
   while i <= 12
     newOption = document.createElement("option")
@@ -33,7 +33,7 @@ addDropDown = (classObj) ->
 validateYear = () ->
 
 
-app.controller 'NewReqCtrl', ($scope, $auth, $alert) ->
+app.controller 'StudyInvCtrl', ($scope, $auth, $alert) ->
   fillTimeDropDown()
   Parse.User.become($auth.getToken())
   fillClassDropDown()
