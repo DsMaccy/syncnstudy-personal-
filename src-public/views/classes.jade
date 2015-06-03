@@ -3,7 +3,7 @@ body
         .container
             .row
                 .page-header
-                    h1.left My Classes
+                    h1.left My Classes &nbsp;
                         small.right Here you can view information about your classes and add new classes
             .row
                 .col
@@ -44,26 +44,59 @@ body
             .row
                 .col-md-12
                     h1 Add New Class
+                    hr
             .row
                 .col-md-12
                     h3 University
                     input#university.form-control.input-lg(type='text', placeholder='UCSD', required)
+                    hr
             .row
                 .col-md-12
                     h3 Course Abbreviation (DepartmentCourse Number)
                     input#course.form-control.input-lg(type='text', placeholder='CSE134B', required)
+                    hr
             .row
                 .col-md-12
                     h3 Quarter/Semester (Season Year)
                     input#quarter.form-control.input-lg(type='text', placeholder='Spring 2015', required)
+                    hr
             .row
                 .col-md-12
                     h3 Days of Week M/Tu/W/Th/F
                     input#days.form-control.input-lg(type='text', placeholder='M/W/F', required)
+                    hr
             .row
                 .col-md-12
                     h3 Time (make sure to include am or pm!)
                     input#classtime.form-control.input-lg(type='text', placeholder='12pm-12:50pm', required)
+                    //h3 Time Start
+                    //.row
+                        .col-sm-3
+                            h6 hour
+                            select#hourBEFORE.form-control.input-md
+                        .col-sm-3
+                            h6 minute
+                            select#minBEFORE.form-control.input-md
+                        .col-sm-3
+                            h6 a.m./p.m.
+                            select.form-control.input-md
+                                option a.m.
+                                option p.m.
+                    //hr
+                    //h3 Time End
+                    //.row
+                        .col-sm-3
+                            h6 hour
+                            select#hourAFTER.form-control.input-md
+                        .col-sm-3
+                            h6 minute
+                            select#minAFTER.form-control.input-md
+                        .col-sm-3
+                            h6 a.m./p.m.
+                            select.form-control.input-md
+                                option a.m.
+                                option p.m.
+                    hr
 
 
 
