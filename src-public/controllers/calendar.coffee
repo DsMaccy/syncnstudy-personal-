@@ -1,4 +1,4 @@
-app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
+app.controller 'CalendarCtrl', ($scope, $auth, moment, User, Calendar) ->
   $scope.name = ""
   $scope.token = $auth.getToken()
   $scope.email = ""
@@ -34,10 +34,17 @@ app.controller 'CalendarCtrl', ($scope, $auth, moment, ParseSDK) ->
     }
   ]
 
-
   init = ->
-    $scope.email = Parse.User.current().getUsername()
-    $scope.name = Parse.User.current().get('name')
+    $scope.email = User.getUsername()
+    $scope.name = User.get('name')
+    ###
+    query = Parse.Query(Calendar)
+    query.equalTo('user', User)
+    query.find success: (calendar) ->
+      $scope.
+      return  ###
+
+
     #Parse.User.become($auth.getToken())
     #$scope.name = Parse.User.current().getName()
 

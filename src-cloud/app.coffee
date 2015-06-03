@@ -42,16 +42,16 @@ app.post('/auth/signup', (req, res) ->
     user.set('name', name)
 
     user.signUp().then((user) ->
-        res.send(token: user.getSessionToken())
+      res.send(token: user.getSessionToken())
     , (error) ->
-        res.status(401).send(message: 'Signup unsuccessful')
+      res.status(401).send(message: 'Signup unsuccessful')
     )
 )
 
 app.post('/auth/login', (req, res) ->
   Parse.User.logIn(req.body.email, req.body.password).then((user) ->
     res.send(token: user.getSessionToken())
-  , (error) ->
+  , (user,error) ->
     res.status(401).send(message: 'Invalid Username or Password')
   )
 )
