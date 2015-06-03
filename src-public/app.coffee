@@ -84,6 +84,14 @@ app.config (
     url: '/addclass'
     controller: 'AddClassCtrl'
     templateUrl: 'addclass.html'
+  .state 'new_requirement',
+    url: '/new_requirement'
+    controller: 'NewReqCtrl'
+    templateUrl: 'new_requirement.html'
+  .state 'new_study_invite',
+    url: '/new_study_invite'
+    controller: 'StudyInvCtrl'
+    templateUrl: 'new_study_invite.html'
 
   $urlRouterProvider.otherwise '/'
 

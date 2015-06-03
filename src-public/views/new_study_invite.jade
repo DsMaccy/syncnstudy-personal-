@@ -1,0 +1,82 @@
+doctype html
+html
+    head
+        script(src="profile.coffee")
+        style.
+            #bottom {
+                margin-bottom: 90px;
+            }
+
+            textarea {
+                resize: none;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+    body
+        h1 Send a New Study Invite
+        h5
+            big Class
+        .input-group.col-sm-12
+            select.form-control.input-md#classList(type='text', placeholder='CSE 100')
+        h5
+            big To
+            .input-group.col-sm-12
+                input.form-control.input-md(type='text', placeholder='Enter the name of a classmate separated by ","')
+        h5
+            big Location
+            .input-group.col-sm-12
+                input.form-control.input-md(type='text', placeholder='Enter a location for the study group')
+        h5
+            big Date
+            .input-group.col-sm-12
+                input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
+        h5
+            big Time
+        .row
+            .col-sm-3
+                h6 hour
+                select#hour.form-control.input-md
+            .col-sm-3
+                h6 minute
+                select#min.form-control.input-md
+            .col-sm-3
+                h6 a.m./p.m.
+                select.form-control.input-md
+                    option a.m.
+                    option p.m.
+        .row
+            .col-lg-12
+                h5
+                    big Description:
+                small Max 240 characters
+        textarea(rows='5', name='Message' maxlength=240)
+        .divider
+        button#bottom.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
+        //.container-form
+            .row
+                .col-md-12.center
+                    h6 Class:
+                    .input-group.col-sm-12
+                        input.form-control.input-md(type='text', placeholder='CSE 100')
+                    h6 To:
+                    .input-group.col-sm-12
+                        input.form-control.input-md(type='text', placeholder='Enter the name of a classmate separated by ","')
+                    h6 Location:
+                    .input-group.col-sm-12
+                        input.form-control.input-md(type='text', placeholder='Enter a location for the study group')
+                    h6 Date:
+                    .input-group.col-sm-12
+                        input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
+                    h6 Time:
+                    .input-group.col-sm-12
+                        input.form-control.input-md(type='text', placeholder='Enter a time e.g. 2:00 p.m.')
+                    h6 Message:
+                    textarea(rows='5', cols='45', name='Message')
+                    .divider
+                    button.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
+
+
+
+
+

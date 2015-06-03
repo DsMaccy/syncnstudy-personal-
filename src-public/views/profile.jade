@@ -2,11 +2,15 @@ doctype html
 html
     head
         script(src="profile.coffee")
-        stylesheet(href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css")
-        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
-        script(src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js")
-    body
+        style.
+            #updateButton, #resetButton {
+                margin-bottom: 90px;
+            }
 
+            textarea {
+                resize: none;
+            }
+    body
         .container
             h2(align='center')
                 label#title Hello
@@ -16,16 +20,12 @@ html
                         big Avatar:
             .row
                 .col-md-12
-                    img(id='avatarimg', align='center', alt='Avatar', height='200', width='200', src='http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg')
+                    img(id='avatarimg', align='center', alt='Avatar', height='200', width='200', src='http://jeanbaptiste.bayle.free.fr/AVATAR/grey_default_avatar1234375017_opensalon.jpg')
                 .col-md-12
                     .btn-group-lg-pic
                         label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(200)') Small
-                        label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(350)') Medium
-                        label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(500)') Large
-                        //label.btn.btn-primary.ng-untouched.ng-valid.active.ng-dirty.ng-valid-parse(onclick='changeSize(500)') Large
-                    //button.btn.btn-info.btn-sm(onclick='changeSize(200)') Small
-                    //button.btn.btn-info.btn-sm(onclick='changeSize(350)') Medium
-                    //button.btn.btn-info.btn-sm(onclick='changeSize(500)') Large
+                        label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(250)') Medium
+                        label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(300)') Large
             .row
             form(role='form')
                 .form-group
@@ -53,7 +53,7 @@ html
                         label
                             big About Me:&#160
                         label
-                            small 24O max characters
+                            small 240 max characters
                         textarea#about.form-control(rows="4" maxlength='240')
-                button.btn.btn-primary.btn-lg(onclick='updateAccInfo()') Update
-                button.btn.btn-primary.btn-lg.pull-right(onclick='resetInfo()') Reset
+                button.btn.btn-primary.btn-lg#updateButton(onclick='updateAccInfo()') Update
+                button.btn.btn-primary.btn-lg.pull-right#resetButton(onclick='resetInfo()') Reset

@@ -9,6 +9,7 @@ current = undefined
 updatePlaceHolders = undefined
 updateParse = undefined
 resetAttr = undefined
+#defaultImgURL = 'http://jeanbaptiste.bayle.free.fr/AVATAR/grey_default_avatar1234375017_opensalon.jpg'
 
 
 updatePlaceHolders = (ParseAttr, PageAttr) ->
@@ -19,7 +20,6 @@ updatePlaceHolders = (ParseAttr, PageAttr) ->
 resetAttr = (PageAttr) ->
   document.getElementById(PageAttr).value = ""
   return
-
 
 init = () ->
   Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
@@ -68,7 +68,7 @@ changeSize = (pxSize) ->
 
 # Handles the cancel button case
 resetInfo = () ->
-  document.getElementById('avatarimg').setAttribute('src',"http://static.dezeen.com/uploads/2013/09/dezeen_Kanye-West_1.jpg")
+  document.getElementById('avatarimg').setAttribute('src','http://jeanbaptiste.bayle.free.fr/AVATAR/grey_default_avatar1234375017_opensalon.jpg')
   document.getElementById('name').value = ""
   #document.getElementById('uni').value = ""
   document.getElementById('maj').value = ""
@@ -87,7 +87,7 @@ updateAccInfo = () ->
 
 # Returns empty_string if the image file is valid
 validateImageFile = () ->
-  # Check if web browser has file reading capabilities
+# Check if web browser has file reading capabilities
   if !window.FileReader
     return "Web Browser cannot Read Files"
 
@@ -164,9 +164,10 @@ updatePlaceHolders = () ->
     document.getElementById('maj').setAttribute('placeholder', current.get('major'))
   if current.get('avatar')
     document.getElementById('imgFile').setAttribute('placeholder', current.get('avatar'))
-  if (current.get('AboutMe'))
+  if current.get('AboutMe')
     document.getElementById('about').setAttribute('placeholder', current.get('AboutMe'))
-  return
+  if current.get('Avatar')
+    document.getElementById("avatarimg").setAttribute('src', current.get('Avatar').url())
 
 
 updateParse = () ->
@@ -197,19 +198,28 @@ updateParse = () ->
         error: (currentUsr, error) ->
           console.log("There was an issue updating the information")
       })
+    ###
   if document.getElementById('imgFile').value
     Parse.User.current().set('avatar', document.getElementById('avatarimg').value,
       {
         error: (currentUsr, error) ->
           console.log("There was an issue updating the information")
       })
+###
   if document.getElementById('about').value
     Parse.User.current().set('AboutMe', document.getElementById('about').value,
       {
         error: (currentUsr, error) ->
           console.log("There was an issue updating the information")
       })
-
+  if document.getElementById('imgFile').files[0]
+    PFile = new Parse.File(document.getElementById('imgFile').files[0].name,
+      document.getElementById('imgFile').files[0])
+    Parse.User.current().set('Avatar', PFile,
+      {
+        error: (currentUsr, error) ->
+          console.log("There was an issue updating the information")
+      })
   # TODO: Add the save for "AboutME" and
   current.save(null,
     {
