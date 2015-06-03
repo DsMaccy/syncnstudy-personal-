@@ -6,14 +6,11 @@ app = angular.module 'angularParseBoilerplate', [
   'ui.router'
   'ui.bootstrap'
   'app.templates'
-  'Parse'
   'angulartics'
   'angulartics.google.analytics'
   'satellizer'
   'mgcrea.ngStrap'
   'mwl.calendar'
-  'parse-angular'
-  'parse-angular.enhance'
 ]
 
 app.config (

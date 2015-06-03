@@ -43,7 +43,7 @@ app.post('/auth/signup', (req, res) ->
 
     user.signUp().then((user) ->
       res.send(token: user.getSessionToken())
-    , (error) ->
+    , (user,error) ->
       res.status(401).send(message: 'Signup unsuccessful')
     )
 )
