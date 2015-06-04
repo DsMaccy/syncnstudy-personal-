@@ -1,39 +1,29 @@
-fillClassDropDown = undefined
-addDropDown = undefined
+app.controller 'StudyInvCtrl', ($scope, $auth, $alert, $window) ->
+  $scope.sendInvite = (invite) ->
+    Invite = Parse.Object.extend('Invite')
+    newInvite = new Invite()
+    newInvite.set('classTitle', invite.classTitle)
+    newInvite.set('description', invite.description)
+    newInvite.save()
+  $scope.classes = []
+  init = ->
+    Event = Parse.Object.extend('Classes')
+    query = new (Parse.Query)(Event)
+    gah = []
+    query.find(
+      success: (object) ->
+        blah = []
+        for aClass in object
+          title = (aClass.get 'title')
+          blah.push title
+        $scope.classes = blah
+        $scope.$apply()
+        console.log(blah)
+        return
+      error: (error) ->
+        alert 'Error: ' + error.code + ' ' + error.message
+        return ['test']
+    )
 
-
-
-fillClassDropDown = () ->
-  classArray = Parse.User.current().get('Classes')
-  addDropDown classObj for classObj in classArray
-
-fillTimeDropDown = () ->
-  #console.log('MOTHA FUCKA')
-  i = 1
-  while i <= 12
-    newOption = document.createElement("option")
-    newOption.innerHTML = i
-    document.getElementById('hour').appendChild(newOption)
-    i++
-  i = 0
-  while i <= 59
-    newOption = document.createElement("option")
-    newOption.innerHTML = i
-    document.getElementById('min').appendChild(newOption)
-    i+=5
-
-
-addDropDown = (classObj) ->
-  newOption = document.createElement("select")
-  newOption.innerHTML = classObj.get('title')
-  document.getElementById('classList').addChild(newOption)
-
-
-
-validateYear = () ->
-
-
-app.controller 'StudyInvCtrl', ($scope, $auth, $alert) ->
-  fillTimeDropDown()
-  Parse.User.become($auth.getToken())
-  fillClassDropDown()
+  init()
+    #$window.location.href = '#!/new_study_invite'
