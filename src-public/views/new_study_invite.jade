@@ -1,7 +1,6 @@
 doctype html
 html
     head
-        //script(src="profile.coffee")
         style.
             #bottom {
                 margin-bottom: 90px;
@@ -14,48 +13,52 @@ html
             }
 
     body
-      h1 Send a New Study Invite
-      h5
-          big Class
-      .input-group.col-sm-12
-          select.form-control.input-md#classList(type='text', ng-model='invite.classTitle' placeholder='CSE 100')
-            option(ng-repeat='x in classes track by $index') {{x}}
-      h5
-          big To
-          .input-group.col-sm-12
-              input.form-control.input-md(type='text', ng-model='inviteList', placeholder='Enter the name of a classmate separated by ","')
-      h5
-          big Location
-          .input-group.col-sm-12
-              input.form-control.input-md(type='text', ng-model='invite.location', placeholder='Enter a location for the study group')
-      h5
-          big Date
-          .input-group.col-sm-12
-              input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
-      h5
-          big Time
-      .row
-          .col-sm-3
-              h6 hour
-              select#hour.form-control.input-md
-                option(ng-repeat='hour in hours') {{hour}}
-          .col-sm-3
-              h6 minute
-              select#min.form-control.input-md
-                option(ng-repeat='minute in minutes') {{minute}}
-          .col-sm-3
-              h6 a.m./p.m.
-              select.form-control.input-md
-                  option a.m.
-                  option p.m.
-      .row
-          .col-lg-12
-              h5
-                  big Description:
-              small Max 240 characters
-      textarea(rows='5', ng-model='invite.description', name='Message' maxlength=240)
-      .divider
-      button#bottom.btn.btn-primary.btn-block(type='button', ng-click='sendInvite(invite)' size='btn-sm') Send
+      form(name='inviteForm')
+        h1 Send a New Study Invite
+        h5
+            big Class
+        .input-group.col-sm-12
+            select.form-control.input-md#classList(type='text', ng-model='invite.classTitle' placeholder='CSE 100')
+              option(ng-repeat='x in classes track by $index') {{x}}
+        h5
+            big To
+            .input-group.col-sm-12
+                input.form-control.input-md(type='text', ng-model='inviteList', placeholder='Enter the name of a classmate separated by ","')
+        h5
+            big Location
+            .input-group.col-sm-12
+                input.form-control.input-md(type='text', ng-model='invite.location', placeholder='Enter a location for the study group')
+        h5
+            big Date
+            .input-group.col-sm-12
+                input.form-control.input-md(type='date', ng-model='invite.date', placeholder='Enter a date in the format YYYY-MM-DD')
+                div(role='alert')
+                  span.error(ng-show='inviteForm.input.$error.required') Required
+                  span.error(ng-show='inviteForm.input.$error.date') Not a valid date!
+        h5
+            big Time
+        .row
+            .col-sm-3
+                h6 hour
+                select#hour.form-control.input-md(ng-model='invite.hour')
+                  option(ng-repeat='hour in hours') {{hour}}
+            .col-sm-3
+                h6 minute
+                select#min.form-control.input-md(ng-model='invite.minute')
+                  option(ng-repeat='minute in minutes') {{minute}}
+            .col-sm-3
+                h6 a.m./p.m.
+                select.form-control.input-md(ng-model='invite.ampm')
+                    option(value='a.m.') a.m.
+                    option(value='p.m.') p.m.
+        .row
+            .col-lg-12
+                h5
+                    big Description:
+                small Max 240 characters
+        textarea(rows='5', ng-model='invite.description', name='Message' maxlength=240)
+        .divider
+        button#bottom.btn.btn-primary.btn-block(type='button', ng-click='sendInvite(invite)' size='btn-sm') Send
         //.container-form
             .row
                 .col-md-12.center
