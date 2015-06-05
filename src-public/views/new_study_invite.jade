@@ -38,9 +38,11 @@ html
           .col-sm-3
               h6 hour
               select#hour.form-control.input-md
+                option(ng-repeat='hour in hours') {{hour}}
           .col-sm-3
               h6 minute
               select#min.form-control.input-md
+                option(ng-repeat='minute in minutes') {{minute}}
           .col-sm-3
               h6 a.m./p.m.
               select.form-control.input-md

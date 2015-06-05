@@ -1,4 +1,6 @@
 app.controller 'StudyInvCtrl', ($scope, $auth, $alert, $window) ->
+  $scope.hours = [12..0]
+  $scope.minutes = [59..0]
   $scope.sendInvite = (invite) ->
     Invite = Parse.Object.extend('Invite')
     newInvite = new Invite()
