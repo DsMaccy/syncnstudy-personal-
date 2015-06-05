@@ -1,10 +1,9 @@
-app.controller 'StudyInvCtrl', ($scope, $auth, $alert, $window, classesService) ->
+app.controller 'StudyInvCtrl', ($scope, $auth, $alert, $window, ParseUtilsService) ->
   $scope.hours = [12..1]
   $scope.minutes = [59..0]
   $scope.classes = []
 
   $scope.sendInvite = (invite) ->
-
     Invite = Parse.Object.extend('Invite')
     newInvite = new Invite()
     newInvite.set('classTitle', invite.classTitle)
@@ -26,7 +25,7 @@ app.controller 'StudyInvCtrl', ($scope, $auth, $alert, $window, classesService) 
     newInvite.save()
 
   # Populate classes combo box
-  classesService.fetchClasses (object) ->
+  ParseUtilsService.fetchObject 'Classes', (object) ->
     for aClass in object
       $scope.classes.push (aClass.get 'title')
     $scope.$apply()
