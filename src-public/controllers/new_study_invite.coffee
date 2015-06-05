@@ -1,7 +1,11 @@
 app.controller 'StudyInvCtrl', ($scope, $auth, $alert, $window, ParseUtilsService) ->
-  $scope.hours = [12..1]
-  $scope.minutes = [59..0]
+  $scope.hours = [1..12]
+  $scope.minutes = [1..59]
   $scope.classes = []
+
+  $scope.inviteList = []
+  $scope.userList = []
+  $scope.loadUsers = (query) -> (user for user in $scope.userList when user.text.includes(query))
 
   $scope.sendInvite = (invite) ->
     Invite = Parse.Object.extend('Invite')
@@ -28,4 +32,9 @@ app.controller 'StudyInvCtrl', ($scope, $auth, $alert, $window, ParseUtilsServic
   ParseUtilsService.fetchObject 'Classes', (object) ->
     for aClass in object
       $scope.classes.push (aClass.get 'title')
+    $scope.$apply()
+
+  ParseUtilsService.fetchObject 'User', (object) ->
+    for user in object
+      $scope.userList.push {"text": (user.get 'username')}
     $scope.$apply()
