@@ -34,9 +34,9 @@ app.controller "ProfileCtrl", ($scope,$auth) ->
   changeTitle(current.get('name'))
 
   document.getElementById('email').innerHTML = current.get('username')
-  if !current.get('university')
-    current.set('university', 'University of California, San Diego')
-  document.getElementById('uni').innerHTML = current.get('university')
+  if !current.get('University')
+    current.set('University', 'University of California, San Diego')
+  document.getElementById('uni').innerHTML = current.get('University')
 
   updatePlaceHolders()
 
@@ -158,8 +158,6 @@ changeTitle = (name) ->
 updatePlaceHolders = () ->
   if current.get('name')
     document.getElementById('name').setAttribute('placeholder', current.get('name'))
-  #if current.get('university')
-  #  document.getElementById('uni').setAttribute('placeholder', current.get('university'))
   if current.get('major')
     document.getElementById('maj').setAttribute('placeholder', current.get('major'))
   if current.get('avatar')
@@ -181,11 +179,11 @@ updateParse = () ->
           console.log("There was an issue updating the information")
       })
   if document.getElementById('uni').value
-    Parse.User.current().set('university', 'University of California, San Diego',
+    Parse.User.current().set('University', 'University of California, San Diego',
       {
         success: (currentUsr) ->
-          updatePlaceHolders('university', 'uni')
-          console.log(current.get('university'))
+          updatePlaceHolders('University', 'uni')
+          console.log(current.get('University'))
         error: (currentUsr, error) ->
           console.log("There was an issue updating the information")
       })

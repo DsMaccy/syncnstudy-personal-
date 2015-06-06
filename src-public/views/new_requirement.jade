@@ -9,6 +9,9 @@ html
          #bottom {
             margin-bottom: 90px;
          }
+         #hour, #min, #month, #day, #year, #dn {
+            margin-bottom: 10px;
+         }
 
          textarea {
             resize: none;
@@ -17,45 +20,76 @@ html
          }
 
    body
-      h1 Add a New Requirement
+      h1 Add a New Class Event (D MAC)
       h5
          big Class
       .input-group.col-sm-12
          select.form-control.input-md#classList(type='text', placeholder='CSE 100')
-      h5
-         big Type of Requirement
-      .input-group.col-sm-12
-         select.form-control.input-md(type='text', placeholder='Type of Requirement')
-            option Essay
-            option Final
-            option Homework
-            option Lab
-            option Project
-            option Quiz
-            option Test
+            //option.ng-scope(ng-repeat='course in courses/* track by $index') {{course.CourseName}} ({{course.Dates}} {{course.Time}})
+            option.ng-scope(ng-repeat='class in classes track by class.index') {{class.CourseName}} ({{class.Dates}} {{class.Time}})
+      .row
+         .col-sm-6
+            h5
+               big Type of Event
+            select#title.form-control.input-md
+               option(value="Essay") Essay
+               option(value="Final") Final
+               option(value="Homework") Homework
+               option(value="Lab") Lab
+               option(value="Project") Project
+               option(value="Quiz") Quiz
+               option(value="Test") Test
+         .col-sm-4
+            h5
+               big Event Number
+            select#num.for-control.input-md
+               option(value="1") 1
+               option(value="2") 2
+               option(value="3") 3
+               option(value="4") 4
+               option(value="5") 5
+               option(value="6") 6
+               option(value="7") 7
+               option(value="8") 8
+               option(value="9") 9
+               option(value="10") 10
+               option(value="11") 11
+               option(value="12") 12
+               option(value="13") 13
+               option(value="14") 14
+               option(value="15") 15
       h5
          big Date
-      .input-group.col-sm-12
-         input.form-control.input-md(type='text', placeholder='Enter a date in the format MM//DD/YYYY')
+
+      .row
+         .col-sm-3
+            h5 month
+            select#month(onchange='changeNumDays()').form-control.input-md
+         .col-sm-3
+            h5 day
+            select#day.form-control.input-md
+         .col-sm-3
+            h5 year
+            select#year.form-control.input-md
       h5
          big Time
       .row
          .col-sm-3
-            h6 hour
+            h5 hour
             select#hour.form-control.input-md
          .col-sm-3
-            h6 minute
+            h5 minute
             select#min.form-control.input-md
          .col-sm-3
-            h6 a.m./p.m.
-            select.form-control.input-md
-               option a.m.
-               option p.m.
+            h5 a.m./p.m.
+            select#dn.form-control.input-md
+               option(value="0") a.m.
+               option(value="1") p.m.
       .row
          .col-lg-12
             h5
                big Description:
             small Max 240 characters
-      textarea(rows='5', name='Message' maxlength=240)
+      textarea#description(rows='5', name='Message' maxlength=240)
       .divider
-      button#bottom.btn.btn-primary.btn-block(type='button', size='btn-sm') Send
+      button#bottom.btn.btn-primary.btn-block(type='button', size='btn-sm' onclick='updateClassEvent()') Send
