@@ -1,3 +1,6 @@
+//
+    Author: Dylan McNamara
+
 doctype html
 html
     head
@@ -6,54 +9,71 @@ html
             #updateButton, #resetButton {
                 margin-bottom: 90px;
             }
-
             textarea {
                 resize: none;
             }
-    body
+            .center {
+                text-align: center;
+                display: block;
+                vertical-align: middle;
+            }
+            .extendWidth {
+                width: 33%;
+            }
+            .fillWidth {
+                width: 100%;
+            }
+            .fillHeight {
+                height: 100%;
+                float: none;
+
+            }
+
+body
         .container
             h2(align='center')
                 label#title Hello
-            .row
-                .col-md-12.center-block
-                    label
-                        big Avatar:
-            .row
-                .col-md-12
-                    img(id='avatarimg', align='center', alt='Avatar', height='200', width='200', src='http://jeanbaptiste.bayle.free.fr/AVATAR/grey_default_avatar1234375017_opensalon.jpg')
-                .col-md-12
-                    .btn-group-lg-pic
-                        label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(200)') Small
-                        label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(250)') Medium
-                        label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid(onclick='changeSize(300)') Large
-            .row
-            form(role='form')
-                .form-group
-                    label(for='img')
-                        input#imgFile.btn.btn-default.btn-info.btn-sm(type='file' accept='image/*' onchange="uploadImage()")
-                .row
-                form(role='form')
-                    .form-group
-                        label(for='usr')
-                            big Name:
-                        input#name.form-control(type='text')
-                    .form-group
-                        label(for='usr')
-                            big Email:
-                        label#email.form-control(type='text') kwest@gary.edu
-                    .form-group
+            .row.form-group.center
+                .col-md-6
+                    .row
                         label
-                            big University:
-                        label#uni.form-control(type='text') University of California, San Diego
-                    .form-group
-                        label
-                            big Major:
-                        input#maj.form-control(type='text')
-                    .form-group
+                            big Avatar:
+                    .row
+                        img(id='avatarimg', align='center', alt='Avatar', width='300', height='300', src='http://jeanbaptiste.bayle.free.fr/AVATAR/grey_default_avatar1234375017_opensalon.jpg')
+                        //.btn-group-lg-pic
+                            label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid.extendWidth(onclick='changeSize(300)') Small
+                            label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid.extendWidth(onclick='changeSize(350)') Medium
+                            label.btn.btn-primary.ng-pristine.ng-untouched.ng-valid.extendWidth(onclick='changeSize(400)') Large
+                        form(role='form')
+                            label.fillWidth(for='img')
+                                input#imgFile.btn.btn-default.btn-info.btn-sm.fillWidth(type='file' accept='image/*' onchange="uploadImage()")
+                .col-md-6
+                    .row
                         label
                             big About Me:&#160
                         label
                             small 240 max characters
-                        textarea#about.form-control(rows="4" maxlength='240')
+                    .row
+                        textarea#about.form-control.fillHeight.fillWidth(maxlength='240' rows=15)
+
+            hr
+            form(role='form')
+                .row.form-group
+                    label(for='usr')
+                        big Name:
+                    input#name.form-control(type='text')
+                .row.form-group
+                    label(for='usr')
+                        big Email:
+                    label#email.form-control(type='text') kwest@gary.edu
+                .row.form-group
+                    label
+                        big University:
+                    label#uni.form-control(type='text') University of California, San Diego
+                .row.form-group
+                    label
+                        big Major:
+                    input#maj.form-control(type='text')
+            .row
                 button.btn.btn-primary.btn-lg#updateButton(onclick='updateAccInfo()') Update
-                button.btn.btn-primary.btn-lg.pull-right#resetButton(onclick='resetInfo()') Reset
+                button.btn.btn-danger.btn-lg.pull-right#resetButton(onclick='resetInfo()') Reset

@@ -1,3 +1,5 @@
+# Author: Dylan McNamara
+
 changeSize = undefined
 changeTitle = undefined
 resetInfo = undefined
@@ -20,15 +22,15 @@ updatePlaceHolders = (ParseAttr, PageAttr) ->
 resetAttr = (PageAttr) ->
   document.getElementById(PageAttr).value = ""
   return
-
+###
 init = () ->
   Parse.initialize('H3mf7FlzKF0fZdNIvGntzqI1TWn0y3gWXjB2FIth','muAXvNfPtfay3imFx07NG0YT2ac2Z33qdrsy9fLV')
   Parse.User.enableRevocableSession()
   return
-
+###
 
 app.controller "ProfileCtrl", ($scope,$auth) ->
-  init()
+  #init()
   Parse.User.become($auth.getToken())
   current = Parse.User.current()
   changeTitle(current.get('name'))
@@ -68,9 +70,11 @@ changeSize = (pxSize) ->
 
 # Handles the cancel button case
 resetInfo = () ->
-  document.getElementById('avatarimg').setAttribute('src','http://jeanbaptiste.bayle.free.fr/AVATAR/grey_default_avatar1234375017_opensalon.jpg')
+  if current.get('Avatar')
+    document.getElementById("avatarimg").setAttribute('src', current.get('Avatar').url())
+  else
+    document.getElementById('avatarimg').setAttribute('src','http://jeanbaptiste.bayle.free.fr/AVATAR/grey_default_avatar1234375017_opensalon.jpg')
   document.getElementById('name').value = ""
-  #document.getElementById('uni').value = ""
   document.getElementById('maj').value = ""
   document.getElementById('imgFile').value = ""
   document.getElementById('about').value = ""
@@ -176,7 +180,7 @@ updateParse = () ->
           updatePlaceHolders('name', 'name')
           console.log(current.get('name'))
         error: (currentUsr, error) ->
-          console.log("There was an issue updating the information")
+          console.error("There was an issue updating the information")
       })
   if document.getElementById('uni').value
     Parse.User.current().set('University', 'University of California, San Diego',
@@ -185,7 +189,7 @@ updateParse = () ->
           updatePlaceHolders('University', 'uni')
           console.log(current.get('University'))
         error: (currentUsr, error) ->
-          console.log("There was an issue updating the information")
+          console.error("There was an issue updating the information")
       })
   if document.getElementById('maj').value
     Parse.User.current().set('major', document.getElementById('maj').value,
@@ -194,21 +198,13 @@ updateParse = () ->
           updatePlaceHolders('major', 'maj')
           console.log(current.get('major'))
         error: (currentUsr, error) ->
-          console.log("There was an issue updating the information")
+          console.error("There was an issue updating the information")
       })
-    ###
-  if document.getElementById('imgFile').value
-    Parse.User.current().set('avatar', document.getElementById('avatarimg').value,
-      {
-        error: (currentUsr, error) ->
-          console.log("There was an issue updating the information")
-      })
-###
   if document.getElementById('about').value
     Parse.User.current().set('AboutMe', document.getElementById('about').value,
       {
         error: (currentUsr, error) ->
-          console.log("There was an issue updating the information")
+          console.error("There was an issue updating the information")
       })
   if document.getElementById('imgFile').files[0]
     PFile = new Parse.File(document.getElementById('imgFile').files[0].name,
@@ -216,7 +212,7 @@ updateParse = () ->
     Parse.User.current().set('Avatar', PFile,
       {
         error: (currentUsr, error) ->
-          console.log("There was an issue updating the information")
+          console.error("There was an issue updating the information")
       })
   # TODO: Add the save for "AboutME" and
   current.save(null,
@@ -226,8 +222,8 @@ updateParse = () ->
         changeTitle(current.get('name'))
         updatePlaceHolders()
       error: (currentUsr, error) ->
-        console.log("There was an issue saving the data to the server.  We apologize for the inconvenience :(")
-        console.log(error)
+        console.error("There was an issue saving the data to the server.  We apologize for the inconvenience :(")
+        console.error(error)
     })
 
   current = Parse.User.current()

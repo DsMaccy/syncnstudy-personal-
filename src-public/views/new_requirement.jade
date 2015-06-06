@@ -20,13 +20,13 @@ html
          }
 
    body
-      h1 Add a New Class Event (D MAC)
+      h1 Add a New Class Event
       h5
          big Class
       .input-group.col-sm-12
          select.form-control.input-md#classList(type='text', placeholder='CSE 100')
             //option.ng-scope(ng-repeat='course in courses/* track by $index') {{course.CourseName}} ({{course.Dates}} {{course.Time}})
-            option.ng-scope(ng-repeat='class in classes track by class.index') {{class.CourseName}} ({{class.Dates}} {{class.Time}})
+            option.ng-scope(ng-repeat='class in classes track by class.index' objId="{{class.objId}}" value="{{class.objId}}") {{class.CourseName}} ({{class.Dates}} {{class.Time}})
       .row
          .col-sm-6
             h5
@@ -60,7 +60,6 @@ html
                option(value="15") 15
       h5
          big Date
-
       .row
          .col-sm-3
             h5 month
