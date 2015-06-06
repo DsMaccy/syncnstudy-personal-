@@ -5,7 +5,7 @@ link(rel='stylesheet', href='bower_components/angular-bootstrap-calendar/dist/cs
 div
     .h1
         .text-center
-            .page-header {{calendarDay}}
+            .page-header {{calendarDay.toDateString()}}
                 .row
                     .col-md-6.text-center
                         .btn-group
@@ -47,7 +47,8 @@ div
               class="ng-isolate-scope">
             </mwl-calendar>
 
-h3#event-editor Edit events
+h3#event-editor Edit Your Events &nbsp;
+   small.right Here you can view information about your events and add new event. Don't forget to save anything you edit!
    button.btn.btn-primary.pull-right( ng-click="events.push({title: 'New event', type: 'important', startsAt: '8:00AM'})") Add new
 
    table.table.table-bordered
@@ -61,6 +62,8 @@ h3#event-editor Edit events
             th Ends at
             th Remove
             tbody
+
+              //the $scope variable are found in ng-model. Thats what you want to save out for parse
               tr.ng-scope(ng-repeat='event in events track by $index')
                 td
                   input.form-control.ng-pristine.ng-untouched.ng-valid(type='text', ng-model='event.title')
@@ -91,4 +94,8 @@ h3#event-editor Edit events
                         i.fa.fa-calendar.fa-lg
                   timepicker(ng-model='event.endsAt', hour-step='1', minute-step='15', show-meridian='true')
                 td
-                  button.btn.btn-danger(ng-click='events.splice($index, 1)') Delete
+                    ul(style='list-style-type: none;')
+                        li
+                            button.btn.btn-success(ng-click='saveEvent(event)') Save
+                        li
+                            button.btn.btn-danger(ng-click='deleteEvent(event); events.splice($index, 1)') Delete

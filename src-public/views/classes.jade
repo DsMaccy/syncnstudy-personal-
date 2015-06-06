@@ -3,11 +3,29 @@ body
         .container
             .row
                 .page-header
+
                     h1.left My Classes &nbsp;
                         small.right Here you can view information about your classes and add new classes
             .row
-                .col
-                    h3.center#userclasses
+                .container
+                    .row
+                        table.table.table-condensed
+                            thread
+                                tr
+                                    th Course Name
+                                    th Dates
+                                    th Time
+                                    th Students
+                                    th Drop from Schedule
+
+                            tbody
+                                tr.ng-scope(ng-repeat='userCourse in userCourses track by $index')
+                                    td {{userCourse.CourseName}}
+                                    td {{userCourse.Dates}}
+                                    td {{userCourse.Time}}
+                                    td {{userCourse.Students}}
+                                    td
+                                        button.btn.btn-primary.btn-xs(onclick='dropClass(event)') {{userCourse.Remove}} {{userCourse.CourseName}}
 
             .row
                 .container
@@ -17,7 +35,7 @@ body
                             input.form-control.input-lg(type='text', placeholder='Search for your class...')
                             span.input-group-btn
                                 button.btn.btn-info.btn-lg(type='button')
-                                    i.glyphicon.glyphicon-search
+                                    i.fa.fa-search
                     .row
                         table.table.table-condensed
                             thread
@@ -32,10 +50,10 @@ body
                                     td {{course.CourseName}}
                                     td {{course.Dates}}
                                     td {{course.Time}}
+                                    td {{course.Students}}
                                     td
-                                        p#cse140 {{course.Students}}
-                                    td
-                                        button.btn.btn-primary.btn-xs(onclick='addClass()') {{course.Add}}
+                                        button.btn.btn-primary.btn-xs(onclick='addClass(event)') {{course.Add}} {{course.CourseName}}
+
 
             .row
                 a.btn.btn-info(onclick='toggle1()', role='button') Class isn't listed?
@@ -69,84 +87,8 @@ body
                 .col-md-12
                     h3 Time (make sure to include am or pm!)
                     input#classtime.form-control.input-lg(type='text', placeholder='12pm-12:50pm', required)
-                    //h3 Time Start
-                    //.row
-                        .col-sm-3
-                            h6 hour
-                            select#hourBEFORE.form-control.input-md
-                        .col-sm-3
-                            h6 minute
-                            select#minBEFORE.form-control.input-md
-                        .col-sm-3
-                            h6 a.m./p.m.
-                            select.form-control.input-md
-                                option a.m.
-                                option p.m.
-                    //hr
-                    //h3 Time End
-                    //.row
-                        .col-sm-3
-                            h6 hour
-                            select#hourAFTER.form-control.input-md
-                        .col-sm-3
-                            h6 minute
-                            select#minAFTER.form-control.input-md
-                        .col-sm-3
-                            h6 a.m./p.m.
-                            select.form-control.input-md
-                                option a.m.
-                                option p.m.
-                    hr
-
-
-
             .row
                 .col-md-12
                     a.btn.btn-primary.btn-md(onclick='toggle2()') Confirm Add
-
-
-            //.dropdown
-                 button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Add Class
-                 span.caret
-                 ul.dropdown-menu
-                     .container
-                        .row
-                            h3 Search for your class below:
-                            .input-group
-                                input.form-control.input-lg(type='text', placeholder='Search for your class...')
-                                span.input-group-btn
-                                    button.btn.btn-info.btn-lg(type='button')
-                                       i.glyphicon.glyphicon-search
-                        .row
-                                table.table.table-condensed
-                                    thread
-                                        tr
-                                            th Course Name
-                                            th Dates
-                                            th Time
-                                            th Add to Schedule
-                                    tbody
-                                        tr
-                                            td CSE 140
-                                            td M/W/F
-                                            td 12-12:50pm
-                                            td
-                                                button.btn.btn-primary.btn-xs Add
-                                        tr
-                                            td CSE 130
-                                            td M/W/F
-                                            td 3-3:50pm
-                                            td
-                                                button.btn.btn-primary.btn-xs Add
-                                        tr
-                                            td CSE 110
-                                            td Tu/Th
-                                            td 5-6:20pm
-                                            td
-                                                button.btn.btn-primary.btn-xs Add
-                        .row
-                            a.btn.btn-info(href='#!/addclass', role='button') Class isn't listed?
-
-
 
 

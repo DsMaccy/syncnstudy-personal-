@@ -1,88 +1,73 @@
 app.controller 'ClassesCtrl', ($scope) ->
 
-
   Classes = Parse.Object.extend('Classes')
+
+  ###
+  Capture ONLY current user's course listing
+  ###
+
+  currUser = Parse.User.current() #get the current user
+  enrolled = currUser.relation('enrolledClasses') #go get the current user's relation
+  #console.log(enrolled) testing
+  masterUserCourseArray = [] #declare the master array for all of the users courses
+
+  userQuery = enrolled.query()
+  userQuery.find
+    success: (searchResult) ->
+      j = 0
+      #console.log('length is ' + searchResult.length)
+      while j < searchResult.length
+        #code stuff
+        oneClass = searchResult[j]
+
+        userCourseArray = []
+        userCourseArray['CourseId'] = oneClass.get 'objectId'
+        userCourseArray['CourseName'] = oneClass.get 'title'
+        userCourseArray['Dates'] = oneClass.get 'weeklysessiondays'
+        userCourseArray['Time'] = oneClass.get 'time'
+        userCourseArray['Students'] = oneClass.get 'numofstudents'
+        userCourseArray['Remove'] = 'Remove'
+
+
+        masterUserCourseArray.push userCourseArray
+
+        j++
+      $scope.userCourses = masterUserCourseArray
+      $scope.$apply()
+
+  ###
+  Remove relation from current users class relation
+  ###
+
+
+
+  ###
+  Capture ALL course listings
+  ###
   query = new (Parse.Query)(Classes)
+  masterCourseArray = []
+  query.find
+    success: (results) ->
 
-  #query for all the users classes.
-  #If hes already in the class, cancel the add()
-  #idk how to loop
-  #query.equalTo 'session', 'Spring 2015'
-  j = 0
-  while j < 4
-    query.skip j
-    query.find
-      success: (results) ->
+      i = 0
+      while i < results.length
 
-        i = 0
-        while i < results.length
-          object = results[i]
-          $scope.courses = [
-            {
-              CourseName: object.get 'title'
-              Dates: object.get 'weeklysessiondays'
-              Time: object.get 'time'
-              Students: object.get 'numofstudents'
-              Add: 'Add'
-            }
-          ]
-          i++
+        object = results[i]
 
-        return
-      error: (error) ->
-        alert 'Error: ' + error.code + ' ' + error.message
-        return
-    j++
+        courseArray = []
+        courseArray['CourseName'] = object.get 'title'
+        courseArray['Dates'] = object.get 'weeklysessiondays'
+        courseArray['Time'] = object.get 'time'
+        courseArray['Students'] = object.get 'numofstudents'
+        courseArray['Add'] = 'Add'
+
+        masterCourseArray.push courseArray
+
+        i++
+      $scope.courses = masterCourseArray
+      $scope.$apply()
 
 
-###
-      num = object.get 'numofstudents'
-      alert 'Successfully retrieved ' + num + ' students.'
-      object.increment 'numofstudents'
-      object.save()
-      num = object.get 'numofstudents'
-      alert 'Incremented nos by 1:  ' + num + ' students.'
-
-
-      return
-    error: (error) ->
-      alert 'Error: ' + error.code + ' ' + error.message
-      return
-  $scope.courses = [
-
-    {
-      CourseName: 'CSE 140'
-      Dates: 'M/W/F'
-      Time: '12-12:50pm'
-      Students: '0'
-      Add: 'Add'
-    }
-    {
-      CourseName: 'CSE 130'
-      Dates: 'M/W/F'
-      Time: '3-3:50pm'
-      Students: '2'
-      Add: 'Add'
-    }
-    {
-      CourseName: 'CSE 110'
-      Dates: 'Tu/Th'
-      Time: '5-6:20pm'
-      Students: '12'
-      Add: 'Add'
-    }
-  ]
-###
-#Author: Gabe Maze-Rogers
-###
-  name: String - class name
-  school: String - university name
-  students: Array of user objects - Students in class
-  numStudents: Int - num of Students in class
-  date: String - When the class is.. Format M/W/F or Tu/Th etc.
-  time: String - When the class is.. Format 1p-1:50p etc.
-  quarter: String - Semester etc. ex Spring 2015
-###
 class Class
   constructor: (@name, @school, @date, @time, @quarter)->
     numStudents: 0
@@ -133,7 +118,7 @@ toggle2= () ->
   text = document.createTextNode(concat);
   para.appendChild(text);
   para.appendChild(line);
-  document.getElementById("userclasses").appendChild(para);
+  #document.getElementById("userclasses").appendChild(para);
 
 
   #Parse stuff
@@ -146,35 +131,74 @@ toggle2= () ->
   classes.set 'time', classTime
   classes.set 'session', seasonYear
   classes.set 'numofstudents', 1
-  classes.save()
+  console.log(classes)
+  classes.save
+    success: ->
+      enrolled = Parse.User.current().relation('enrolledClasses') #go get the relation of curr user to classes
+      enrolled.add classes #add the class in there
+      Parse.User.current().save()
+      location.reload()
+      return
 
-addClass= () ->
-# #document.body.insertAdjacentHTML( 'lastclass', 'button.btn.btn-primary.btn-block CSE 140');
-# document.getElementById("lastclass").innerHTML = 'button.btn.btn-primary.btn-block CSE 140';
-  tvalue = document.getElementById("cse140");
-  tvalue.value++;
-
-
-  #update parse value numOfStudents
-  Classes = Parse.Object.extend('Classes')
-  query = new (Parse.Query)(Classes)
-  query.equalTo 'title', 'CSE140'
-
+addClass= (event) ->
   #query for all the users classes.
   #If hes already in the class, cancel the add()
+  temp = event.target.firstChild.nodeValue
+  nameOfCourse = temp.split(" ")
+
+  Classes = Parse.Object.extend('Classes')
+  currentUser = Parse.User.current()
+  query = new (Parse.Query)(Classes)
+
+  query.equalTo 'title', nameOfCourse[1]
 
   query.first
     success: (object) ->
 
-      num = object.get 'numofstudents'
-      alert 'Successfully retrieved ' + num + ' students.'
       object.increment 'numofstudents'
-      object.save()
-      num = object.get 'numofstudents'
-      alert 'Incremented nos by 1:  ' + num + ' students.'
 
+      enrolled = currentUser.relation('enrolledClasses') #go get the relation
+      enrolled.add object #add the class in there
+
+      currentUser.save()
+      object.save()
+      location.reload()
 
       return
     error: (error) ->
       alert 'Error: ' + error.code + ' ' + error.message
       return
+
+dropClass= (event) ->
+
+  ###
+  removeClass = currUser.relation('enrolledClasses')
+  userQuery = removeClass.query()
+  ###
+
+  temp = event.target.firstChild.nodeValue
+  nameOfCourse = temp.split(" ")
+
+  Classes = Parse.Object.extend('Classes')
+
+  currentUser = Parse.User.current()
+  query = new (Parse.Query)(Classes)
+
+  query.equalTo 'title', nameOfCourse[1]
+
+  query.first
+    success: (object) ->
+
+      object.increment 'numofstudents', -1
+      drop = currentUser.relation("enrolledClasses")
+      drop.remove object #drop the class in there
+
+      currentUser.save()
+      object.save()
+      location.reload()
+
+      return
+    error: (error) ->
+      alert 'Error: ' + error.code + ' ' + error.message
+      return
+
