@@ -1,4 +1,4 @@
-app.controller 'SignupCtrl', ($scope, $auth, $window) ->
+app.controller 'SignupCtrl', ($scope, $auth, $window, Calendar) ->
   $scope.signup = ->
     $auth.signup(
       displayName: $scope.displayName,
@@ -8,7 +8,7 @@ app.controller 'SignupCtrl', ($scope, $auth, $window) ->
     .then((response) ->
       $auth.setToken(response.data.token)
       Parse.User.become(response.data.token)
-      $window.location.href = '/'
+      $window.location.href = '#!/invites'
       $alert(
         content: 'You have successfully signed up'
         animation: 'fadeZoomFadeDown'

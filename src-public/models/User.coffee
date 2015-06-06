@@ -1,2 +1,2 @@
 app.factory 'User', ->
-  Parse.User
+  Parse.User.current()

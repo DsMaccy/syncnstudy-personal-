@@ -1,4 +1,4 @@
-app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment, ParseSDK) ->
+app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment, Calendar) ->
   $scope.name = ""
   $scope.token = $auth.getToken()
   $scope.email = ""
@@ -76,4 +76,3 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment, ParseSDK) ->
     $event.stopPropagation()
     event[field] = !event[field]
     return
-
