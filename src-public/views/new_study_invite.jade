@@ -23,7 +23,7 @@ html
         h5
             big To
             .input-group.col-sm-12
-                tags-input(ng-model='inviteList', placeholder='Add email', replace-spaces-with-dashes="false")
+                tags-input.bootstrap(ng-model='invite.inviteList', placeholder='Add email', replace-spaces-with-dashes="false")
                   auto-complete(source='loadUsers($query)', min-length="0", debounce-delay="0", max-results="10")
         h5
             big Location
