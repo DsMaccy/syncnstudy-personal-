@@ -3,11 +3,12 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
   $scope.token = $auth.getToken()
   $scope.email = ""
   $scope.calendarView = 'month'
-  $scope.calendarDay = new Date()
   $scope.calendarViewTitle = ''
+  $scope.calendarDay = new Date()#.toDateString()
+  $scope.$apply()
+  #$scope.calendarViewTitle = ''
 
   ###
-  Author: Kurt
   Capture ALL current user's class events
   Get current user
   Get current user's classes
@@ -16,46 +17,12 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
   ###
   Classes = Parse.Object.extend('Classes')
   currUser = Parse.User.current() #get the current user
-
-  enrolled = currUser.relation('enrolledClasses') #go get the current user's relation
+  classEvents = currUser.relation('classEvents') #go get the current user's relation
   masterClassEventsArray = [] #declare the master array for all of the users courses
 
-  userQuery = enrolled.query()
-  userQuery.find
-    success: (enrolledResult) ->
-      l = 0
-      while l < enrolledResult.length
-        oneClass = enrolledResult[l]
-
-        #now I have one class. Each class has an events relation
-        classEvents = oneClass.relation('classevents')
-
-        classEventsQuery = classEvents.query()
-        classEventsQuery.find
-          success: (ceResults) ->
-            m = 0
-            while m < ceResults.length
-              oneClassEvent = ceResults[m]
-
-              classEventsArray = []
-              #indEventsArray['$SCOPE_VAR'] = oneIndEvent.get 'PARSE_VAR'
-              classEventsArray['title'] = oneClassEvent.get 'title'
-              classEventsArray['location'] = oneClassEvent.get 'location'
-              classEventsArray['message'] = oneClassEvent.get 'message'
-              classEventsArray['type'] = oneClassEvent.get 'type'
-              classEventsArray['startsAt'] = oneClassEvent.get 'startsAt'
-              classEventsArray['endsAt'] = oneClassEvent.get 'endsAt'
-
-              masterClassEventsArray.push classEventsArray
-
-              m++
-
-      $scope.events = masterClassEventsArray
-      $scope.$apply()
-
+  classEventsQuery = classEvents.query()
 
   ###
-  Author: Kurt
   Capture ONLY current user's individual events
   Get current user
   Get current user's events
@@ -74,7 +41,7 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
         oneIndEvent = ieResults[k]
 
         indEventsArray = []
-        #indEventsArray['$SCOPE_VAR'] = oneIndEvent.get 'PARSE_VAR'
+        # FORMAT indEventsArray['$SCOPE_VAR'] = oneIndEvent.get 'PARSE_VAR'
         indEventsArray['title'] = oneIndEvent.get 'title'
         indEventsArray['location'] = oneIndEvent.get 'location'
         indEventsArray['message'] = oneIndEvent.get 'message'
@@ -87,6 +54,31 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
         k++
       $scope.events = masterIndEventsArray
       $scope.$apply()
+  console.log(masterIndEventsArray)
+
+  classEvents = currUser.relation('classEvents')
+  classEvents = classEvents.query()
+  classEvents.find
+    success: (classResults) ->
+      k = 0
+      while k < classResults.length
+        oneIndEvent = classResults[k]
+
+        indEventsArray = []
+        # FORMAT indEventsArray['$SCOPE_VAR'] = oneIndEvent.get 'PARSE_VAR'
+        indEventsArray['title'] = oneIndEvent.get 'title'
+        indEventsArray['location'] = oneIndEvent.get 'location'
+        indEventsArray['message'] = oneIndEvent.get 'message'
+        indEventsArray['type'] = oneIndEvent.get 'type'
+        indEventsArray['startsAt'] = oneIndEvent.get 'startsAt'
+        indEventsArray['endsAt'] = oneIndEvent.get 'endsAt'
+
+        masterIndEventsArray.push indEventsArray
+
+        k++
+      $scope.events = masterIndEventsArray
+      $scope.$apply()
+
 
 
 
@@ -132,16 +124,14 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
     return
 
 
-  ###
-  Author: Kurt
-  Save User's events into parse
-
-  1. get current user
-  2. get the event they wanted to save
-  3. save user's event in parse
-  ###
   $scope.saveEvent = (event) ->
+    ###
+    Save User's events into parse
 
+    1. get current user
+    2. get the event they wanted to save
+    3. save user's event in parse
+    ###
     console.log('you just tried to save an event!')
 
     Event = Parse.Object.extend('Event')
@@ -162,16 +152,22 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
         location.reload()
         return
 
-  ###
-  Author: Kurt
-  Delete User's events from parse
 
-  Get current user
-  Query for event to delete
-  Call obj.destroy()
-  ###
+        #Parse.User.current().save()
+
+
   $scope.deleteEvent= (event) ->
+    ###
+    Delete User's events from parse
+    ###
+    console.log('you just tried to delete an event!')
+    console.log(event)
 
+    ###
+    get current user
+    query for event to delete
+    call obj.destroy()
+    ###
     currUser = Parse.User.current() #get the current user
     delEvent = currUser.relation('individualEvents') #go get the current user's relation
 
