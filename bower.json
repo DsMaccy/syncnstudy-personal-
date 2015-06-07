@@ -22,10 +22,11 @@
     "angular-bootstrap-calendar": "https://github.com/mattlewis92/angular-bootstrap-calendar.git",
     "parse-js-sdk": "https://github.com/albemuth/parse-js-sdk.git",
     "Font-Awesome": "https://github.com/FortAwesome/Font-Awesome.git",
-    "ng-tags-input": "latest"
+    "ng-tags-input": "latest",
+    "bootstrap-material-design": "latest"
   },
   "resolutions": {
-    "angular": ">= 1.1.5",
+    "angular": "1.4.x",
     "bootstrap": "~3.3.4",
     "moment": "2.6.x"
   }

@@ -22,6 +22,7 @@ gulp.task 'vendor', (done) ->
     'bower_components/angular-animate/angular-animate.js'
     'bower_components/parse-js-sdk/lib/parse.min.js'
     'bower_components/ng-tags-input/ng-tags-input.min.js'
+    'bower_components/bootstrap-material-design/dist/js/*.min.js'
   ]
   .pipe(concat('vendor.js'))
   .on 'error', gutil.log
