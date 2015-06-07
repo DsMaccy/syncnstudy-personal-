@@ -6,28 +6,28 @@ addDropDown = undefined
 
 
 fillClassDropDown = ($scope) ->
-  classArray = Parse.User.current().get('Classes')
+
+  user = Parse.User.current()
+  relation = user.relation('enrolledClasses')
   $scope.classes = []
-  if classArray.length != 0
-    Classes = Parse.Object.extend("Classes")
-    classQuery = new Parse.Query(Classes)
-    classQuery.get(classObjId, {
-      success : (result) ->
+
+  relation.query().find({
+    success: (list) ->
+      if list.length == 0
+        document.getElementById("bottom").setAttribute('disabled',true)
+        alert("You have not enrolled in any classes")
+      else
         $scope.classes.push({
           CourseName: result.get('title')
           Dates: result.get('weeklysessiondays')
           Time: result.get('time')
           index: $scope.classes.length
           objId: result.id
-          })
-      error: (error) ->
-        classArray.remove(classObjId)
-        console.error('nothing found')
-        console.error(error)
-      })for classObjId in classArray
-  else # this part works correctly
-    document.getElementById("bottom").setAttribute('disabled',true)
-    alert("You have not enrolled in any classes")
+        }) for result in list
+        $scope.$apply()
+    error: (error) ->
+      console.error(error)
+  })
 
 # Fill in various select fields for the date and time
 fillTimeDropDown = () ->
@@ -132,9 +132,6 @@ getDate = () ->
   returnObj.setMilliseconds(0)
   returnObj.setMinutes(parseInt(document.getElementById("min").value))
 
-  console.log(returnObj.getMonth())
-  console.log(returnObj.toString())
-
   return returnObj
 
 ################   PARSE STUFF BELOW   ################
@@ -150,19 +147,15 @@ checkValid = (event, title, number) ->
 # Checks if the class already contains the class event
 #TODO fill in this method
 checkIfEventExists = (classParseObject, title, number) ->
-  eventList = classParseObject.get('eventlist')
-  console.log("We're in")
+  #eventList = classParseObject.get('eventlist')
   Event = Parse.Object.extend('Event')
   eventQuery = new Parse.Query(Event)
   eventQuery.equalTo('isClassEvent',true)
   eventQuery.equalTo('title',title)
   eventQuery.equalTo('numassignment',number)
-  #eventQuery.equalTo('numassignment',number+1)
   eventQuery.first({
     success: (obj) ->
       if obj == undefined
-        #TODO Have it push shit to parse
-        console.log("holy shit here we go")
         eventDoesNotExist(classParseObject)
       else
         eventDoesExist()
@@ -175,18 +168,22 @@ eventDoesExist = () ->
   alert("This event has already been created for the class")
 # Method gets called when the "Send" button gets pushed
 
-eventDoesNotExist = (result) ->
+eventDoesNotExist = (classParseObject) ->
   ClassEvent = Parse.Object.extend('Event')
   newCE = new ClassEvent()
-
   timeOfEvent = getDate()
+  endTime = getDate()
+  endTime.setHours(timeOfEvent.getHours() + 1)
 
   newCE.set({
-      datedue: timeOfEvent,
-      description: document.getElementById('description').value
-      title: document.getElementById('title').value
-      numassignment: parseInt(document.getElementById('num').value)
-      isClassEvent: true
+      startsAt: timeOfEvent,
+      endsAt: endTime, # THIS HAS BEEN CAUSING AN ERROR
+      location: classParseObject.get('title'),
+      message: document.getElementById('description').value,
+      title: document.getElementById('title').value,
+      numassignment: parseInt(document.getElementById('num').value),
+      isClassEvent: true,
+      type: "important"
     },
     {
       error: (currentUsr, error) ->
@@ -195,11 +192,24 @@ eventDoesNotExist = (result) ->
   newCE.save(null,
     {
       success: (newCE) ->
-        result.add('eventlist', newCE.id)
-        result.save(null, {
+        user = Parse.User.current()
+
+        userRelation = user.relation('classEvents')
+        classRelation = classParseObject.relation('classevents')
+
+        userRelation.add(newCE)
+        classRelation.add(newCE)
+
+        #classParseObject.add('eventlist', newCE.id)
+        classParseObject.save(null, {
           success: (obj) ->
+            user.save({
+              error: (error) ->
+                console.error(error)
+            })
             alert("New class event has been created successfully")
-  #window.location.assign("#!/home")
+            #TODO: Uncomment this line of code
+            window.location.assign("#!/home")
           error: (error) ->
             alert("There was an issue saving the data to the server.  We apologize for the inconvenience :(")
             console.error(error)
@@ -208,14 +218,12 @@ eventDoesNotExist = (result) ->
 
 updateClassEvent = () ->
   # Gather and save data to a new Event object
-
   Classes = Parse.Object.extend('Classes')
   classQuery = new Parse.Query(Classes)
 
   classQuery.get(document.getElementById('classList').value, {
     success: (result) ->
       #TODO Verify correct value of Date is being pushed to the database
-
       checkIfEventExists(result, document.getElementById('title').value, parseInt(document.getElementById('num').value))
 
     error: (error) ->

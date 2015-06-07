@@ -5,15 +5,15 @@ link(rel='stylesheet', href='bower_components/angular-bootstrap-calendar/dist/cs
 div
     .h1
         .text-center
-            .page-header {{calendarDay.toDateString()}}
+            .page-header {{calendarDay}}
                 .row
                     .col-md-6.text-center
                         .btn-group
-                            button.btn.btn-primary.ng-isolate-scope(mwl-date-modifier='', date='calendarDay', decrement='calendarView') Previous
+                            button.btn.btn-primary.ng-isolate-scope(mwl-date-modifier='', date='calendarDay.toDateString()', decrement='calendarView') Previous
 
-                            button.btn.btn-default.ng-isolate-scope(mwl-date-modifier='', date='calendarDay', set-to-today='') Today
+                            button.btn.btn-default.ng-isolate-scope(mwl-date-modifier='', date='calendarDay.toDateString()', set-to-today='') Today
 
-                            button.btn.btn-primary.ng-isolate-scope(mwl-date-modifier='', date='calendarDay', increment='calendarView') Next
+                            button.btn.btn-primary.ng-isolate-scope(mwl-date-modifier='', date='calendarDay.toDateString()', increment='calendarView') Next
 
                     br.visible-xs.visible-sm
 
