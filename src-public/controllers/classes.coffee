@@ -8,7 +8,6 @@ app.controller 'ClassesCtrl', ($scope) ->
 
   currUser = Parse.User.current() #get the current user
   enrolled = currUser.relation('enrolledClasses') #go get the current user's relation
-  #console.log(enrolled) testing
   masterUserCourseArray = [] #declare the master array for all of the users courses
 
   userQuery = enrolled.query()

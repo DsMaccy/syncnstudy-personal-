@@ -5,15 +5,15 @@ link(rel='stylesheet', href='bower_components/angular-bootstrap-calendar/dist/cs
 div
     .h1
         .text-center
-            .page-header {{calendarDay}}
+            .page-header {{calendarDay.toDateString()}}
                 .row
                     .col-md-6.text-center
                         .btn-group
-                            button.btn.btn-primary.ng-isolate-scope(mwl-date-modifier='', date='calendarDay.toDateString()', decrement='calendarView') Previous
+                            button.btn.btn-primary.ng-isolate-scope(mwl-date-modifier='', date='calendarDay', decrement='calendarView') Previous
 
-                            button.btn.btn-default.ng-isolate-scope(mwl-date-modifier='', date='calendarDay.toDateString()', set-to-today='') Today
+                            button.btn.btn-default.ng-isolate-scope(mwl-date-modifier='', date='calendarDay', set-to-today='') Today
 
-                            button.btn.btn-primary.ng-isolate-scope(mwl-date-modifier='', date='calendarDay.toDateString()', increment='calendarView') Next
+                            button.btn.btn-primary.ng-isolate-scope(mwl-date-modifier='', date='calendarDay', increment='calendarView') Next
 
                     br.visible-xs.visible-sm
 
@@ -96,6 +96,6 @@ h3#event-editor Edit Your Events &nbsp;
                 td
                     ul(style='list-style-type: none;')
                         li
-                            button.btn.btn-success(ng-click='saveEvent(event)') Save
+                            button.btn.btn-success(ng-click='saveEvent(event)', ng-show='isNotClassEvent(event)') Save
                         li
-                            button.btn.btn-danger(ng-click='deleteEvent(event); events.splice($index, 1)') Delete
+                            button.btn.btn-danger(ng-click='deleteEvent(event); events.splice($index, 1)', ng-show='isNotClassEvent(event)') Delete
