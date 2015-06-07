@@ -5,6 +5,7 @@ concat = require 'gulp-concat'
 gulp.task 'vendor', (done) ->
   gulp.src [
     'bower_components/angular/angular.min.js'
+    'bower_components/jquery/dist/jquery.js'
     'bower_components/angular-resource/angular-resource.min.js'
     'bower_components/angular-ui-router/release/angular-ui-router.min.js'
     'bower_components/angular-translate/angular-translate.min.js'
@@ -23,6 +24,10 @@ gulp.task 'vendor', (done) ->
     'bower_components/parse-js-sdk/lib/parse.min.js'
     'bower_components/ng-tags-input/ng-tags-input.min.js'
     'bower_components/bootstrap-material-design/dist/js/*.min.js'
+    'bower_components/angular-animate/angular-animate.min.js'
+    'bower_components/angular-aria/angular-aria.min.js'
+    'bower_components/angular-material/angular-material.min.js'
+    'bower_components/md-date-time/dist/md-date-time.js'
   ]
   .pipe(concat('vendor.js'))
   .on 'error', gutil.log

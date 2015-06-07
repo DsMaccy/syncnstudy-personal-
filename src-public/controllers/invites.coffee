@@ -8,8 +8,6 @@ app.controller 'InvitesCtrl', ($scope) ->
         console.log('in user fun')
         entry = $scope.accepts[index]
         $scope.accepts.splice(index, 1)
-        User = Parse.Object.extend('User')
-        query = new Parse.Query(User)
         userInvites = user.get 'Invite'
         result = (item for item in userInvites when item.inviteId != entry.inviteId)
         console.log(result)

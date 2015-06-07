@@ -12,6 +12,8 @@ app = angular.module 'angularParseBoilerplate', [
   'mgcrea.ngStrap'
   'mwl.calendar'
   'ngTagsInput'
+  'ngMaterial'
+  'mdDateTime'
 ]
 
 app.config (
