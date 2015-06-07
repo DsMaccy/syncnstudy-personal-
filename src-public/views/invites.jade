@@ -28,7 +28,7 @@ body
                                                             li
                                                                 table
                                                                     td
-                                                                        button.btn.btn-primary.btn-block(ng-click='accepts.push(invites.splice($index,1)[0])') Accept
+                                                                        button.btn.btn-primary.btn-block(ng-click='acceptInvite($index)') Accept
                                                                     td
                                                                         button.btn.btn-danger(ng-click='deleteInvite($index)') Decline
     .col-md-6
@@ -59,4 +59,4 @@ body
                                                             li
                                                                 table
                                                                     td
-                                                                        button.btn.btn-danger(ng-click='accepts.splice($index, 1)') Delete
+                                                                        button.btn.btn-danger(ng-click='deleteThing($index)') Delete
