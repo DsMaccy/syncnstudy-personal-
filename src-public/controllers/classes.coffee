@@ -14,7 +14,6 @@ app.controller 'ClassesCtrl', ($scope) ->
   userQuery.find
     success: (searchResult) ->
       j = 0
-      #console.log('length is ' + searchResult.length)
       while j < searchResult.length
         #code stuff
         oneClass = searchResult[j]
@@ -26,6 +25,7 @@ app.controller 'ClassesCtrl', ($scope) ->
         userCourseArray['Time'] = oneClass.get 'time'
         userCourseArray['Students'] = oneClass.get 'numofstudents'
         userCourseArray['Remove'] = 'Remove'
+        userCourseArray['objectId'] = oneClass.id
 
 
         masterUserCourseArray.push userCourseArray
@@ -33,11 +33,9 @@ app.controller 'ClassesCtrl', ($scope) ->
         j++
       $scope.userCourses = masterUserCourseArray
       $scope.$apply()
-
   ###
   Remove relation from current users class relation
   ###
-
 
 
   ###
@@ -59,18 +57,45 @@ app.controller 'ClassesCtrl', ($scope) ->
         courseArray['Time'] = object.get 'time'
         courseArray['Students'] = object.get 'numofstudents'
         courseArray['Add'] = 'Add'
+        courseArray['objectId'] = object.id
 
         masterCourseArray.push courseArray
 
         i++
+      masterCourseArray.sort(sortFunction)
       $scope.courses = masterCourseArray
       $scope.$apply()
 
+####                          END OF APP.CONTROLLER                               ####
 
-class Class
-  constructor: (@name, @school, @date, @time, @quarter)->
-    numStudents: 0
-    students: 0
+
+
+
+
+app.filter('searchFor', ()->
+  return (arr, searchString)->
+    if(!searchString)
+      return arr;
+    result = [];
+    searchString = searchString.toUpperCase()
+    angular.forEach(arr, (course) ->
+      if course.CourseName.toUpperCase().indexOf(searchString) != -1
+        result.push(course)
+    )
+    return result
+)
+
+#Search function for displaying classes by student
+sortFunction= (a,b) ->
+  if a['Students'] < b['Students']
+    return 1
+  if a['Students'] > b['Students']
+    return -1
+
+
+
+
+
 
 toggle1= () ->
   document.getElementById("page1").setAttribute("style","display:none");
@@ -104,8 +129,6 @@ toggle2= () ->
     return;
 
 
-
-
   newClass = new Class(courseName, schoolName, daysOfWeek, classTime, seasonYear);
   newClass.numStudents = 1;
 
@@ -130,7 +153,6 @@ toggle2= () ->
   classes.set 'time', classTime
   classes.set 'session', seasonYear
   classes.set 'numofstudents', 1
-  console.log(classes)
   classes.save
     success: ->
       enrolled = Parse.User.current().relation('enrolledClasses') #go get the relation of curr user to classes
@@ -139,51 +161,67 @@ toggle2= () ->
       location.reload()
       return
 
-addClass= (event) ->
-  #query for all the users classes.
-  #If hes already in the class, cancel the add()
-  temp = event.target.firstChild.nodeValue
-  nameOfCourse = temp.split(" ")
+
+
+
+
+
+
+
+
+# onclick function for the add class button
+addClass = (event) ->
+  classObjectId = event.target.id
 
   Classes = Parse.Object.extend('Classes')
   currentUser = Parse.User.current()
   query = new (Parse.Query)(Classes)
 
-  query.equalTo 'title', nameOfCourse[1]
+  query.equalTo 'objectId', classObjectId
 
   query.first
     success: (object) ->
 
-      object.increment 'numofstudents'
 
       enrolled = currentUser.relation('enrolledClasses') #go get the relation
-      enrolled.add object #add the class in there
+      classQuery = enrolled.query() # check if relation exists
+      classQuery.equalTo('objectId', object.id)
+      classQuery.find({
+        success: (classInQuestion) ->
+          if !classInQuestion or classInQuestion.length == 0
+            object.increment 'numofstudents'
+            enrolled.add object #add the class in there
 
-      currentUser.save()
-      object.save()
-      location.reload()
+            currentUser.save()
+            object.save()
+            location.reload()
+          else
+            alert ("You are already enrolled in this class")
+            ###
+            $alert(
+              content: "You are already enrolled in this class"
+              animation: 'fadeZoomFadeDown'
+              type: 'material'
+              duration: 3
+            )###
+      })
+      #if ()
+
 
       return
     error: (error) ->
       alert 'Error: ' + error.code + ' ' + error.message
       return
 
-dropClass= (event) ->
-
-  ###
-  removeClass = currUser.relation('enrolledClasses')
-  userQuery = removeClass.query()
-  ###
-
-  temp = event.target.firstChild.nodeValue
-  nameOfCourse = temp.split(" ")
+# onclick function for the remove class button
+dropClass = (event) ->
 
   Classes = Parse.Object.extend('Classes')
-
   currentUser = Parse.User.current()
-  query = new (Parse.Query)(Classes)
+  classObjectId = event.target.id
 
-  query.equalTo 'title', nameOfCourse[1]
+  query = new (Parse.Query)(Classes)
+  query.equalTo 'objectId', classObjectId
 
   query.first
     success: (object) ->

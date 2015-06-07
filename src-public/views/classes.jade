@@ -25,14 +25,14 @@ body
                                     td {{userCourse.Time}}
                                     td {{userCourse.Students}}
                                     td
-                                        button.btn.btn-primary.btn-xs(onclick='dropClass(event)') {{userCourse.Remove}} {{userCourse.CourseName}}
+                                        button.btn.btn-primary.btn-xs(onclick='dropClass(event)', id='{{userCourse.objectId}}') {{userCourse.Remove}} {{userCourse.CourseName}}
 
             .row
                 .container
                     .row
                         h3 Search for your class below:
                         .input-group
-                            input.form-control.input-lg(type='text', placeholder='Search for your class...')
+                            input.form-control.input-lg(type='text', ng-model="searchString", placeholder='Search for your class...')
                             span.input-group-btn
                                 button.btn.btn-info.btn-lg(type='button')
                                     i.fa.fa-search
@@ -46,13 +46,14 @@ body
                                     th Students
                                     th Add to Schedule
                             tbody
-                                tr.ng-scope(ng-repeat='course in courses track by $index')
+                                //tr.ng-scope(ng-repeat='course in courses track by $index')
+                                tr.ng-scope(ng-repeat="course in courses | searchFor:searchString")
                                     td {{course.CourseName}}
                                     td {{course.Dates}}
                                     td {{course.Time}}
                                     td {{course.Students}}
                                     td
-                                        button.btn.btn-primary.btn-xs(onclick='addClass(event)') {{course.Add}} {{course.CourseName}}
+                                        button.btn.btn-primary.btn-xs(onclick='addClass(event)', id='{{course.objectId}}') {{course.Add}} {{course.CourseName}}
 
 
             .row
