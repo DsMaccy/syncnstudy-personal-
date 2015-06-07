@@ -16,6 +16,10 @@ html
       form(name='inviteForm')
         h1 Send a New Study Invite
         h5
+            big Event Title
+            .input-group.col-sm-12
+                input.form-control.input-md(type='text', ng-model='invite.eventTitle', placeholder='Enter a event title for the study group')
+        h5
             big Class
         .input-group.col-sm-12
             select.form-control.input-md#classList(type='text', ng-model='invite.classTitle' placeholder='CSE 100')
