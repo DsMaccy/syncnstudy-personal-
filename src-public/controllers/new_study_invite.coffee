@@ -33,11 +33,19 @@ app.controller 'StudyInvCtrl', ($scope, $auth, $alert, $window, ParseUtils) ->
     console.log(date.toDateString() + ' Time: ' + date.toTimeString())
 
     newInvite.set('invitedList', invite.inviteList.map((invite) -> invite.text))
+    ###if invite.inviteList.length == 0
+      # Add everyone
+    else
+      newInvite.set('invitedList', invite.inviteList.map((invite) -> invite.text))
+    ###
+
+    # Change the 'for' field to the current user
     Parse.User.current().fetch().then (user) ->
       newInvite.addUnique 'invitedList', user.get 'username'
       newInvite.set 'from', user.get 'username'
       newInvite.save()
-      #window.location.assign("#!/invites")
+
+    window.location.assign("#!/invites")
 
   # Populate classes combo box
   ParseUtils.fetchObject 'Classes', (object) ->
