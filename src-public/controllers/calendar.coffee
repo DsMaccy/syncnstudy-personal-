@@ -30,6 +30,7 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
   indEvents = currUser.relation('individualEvents') #go get the current user's relation
   masterIndEventsArray = [] #declare the master array for all of the users courses
 
+  # Add individual events to the calendar
   indEventsQuery = indEvents.query()
   indEventsQuery.find
     success: (ieResults) ->
@@ -53,8 +54,8 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
         k++
       $scope.events = masterIndEventsArray
       $scope.$apply()
-  console.log(masterIndEventsArray)
 
+  # Add class events to the calendar
   classEvents = currUser.relation('classEvents')
   classEvents = classEvents.query()
   classEvents.find
@@ -85,7 +86,37 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
 
 
 
+  # Add accepted invites to the calendar
+  inviteList = currUser.get('Invite')
+  Invite = Parse.Object.extend('Invite')
+  inviteQuery = new Parse.Query(Invite)
+  if inviteList
+    k = 0
+    while k < inviteList.length
+      inviteMap = inviteList[k]
+      if !inviteMap.pending
+        inviteQuery.get(inviteMap.inviteId, {
+          success: (invite) ->
+            inviteArray = []
 
+            endDate = invite.get 'eventDate'
+            endDate.setHours(endDate.getHours() + 1)
+
+            # FORMAT indEventsArray['$SCOPE_VAR'] = oneIndEvent.get 'PARSE_VAR'
+            inviteArray['title'] = invite.get('eventTitle')
+            inviteArray['location'] = invite.get 'location'
+            inviteArray['message'] = invite.get 'description'
+            inviteArray['type'] = "info"
+            inviteArray['startsAt'] = invite.get 'eventDate'
+            inviteArray['endsAt'] = endDate
+            inviteArray['objId'] = invite.id
+            inviteArray['isClassEvent'] = true
+
+            masterIndEventsArray.push inviteArray
+        })
+      k++
+    $scope.events = masterIndEventsArray
+    $scope.$apply()
 
   init = ->
     $scope.email = Parse.User.current().getUsername()
@@ -129,7 +160,7 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
 
 
   $scope.isNotClassEvent = (event) ->
-    if event.isClassEvent
+    if typeof event == Parse.Object.extend("Invite") or event.isClassEvent
       return false
     return true
 
@@ -141,7 +172,6 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
     2. get the event they wanted to save
     3. save user's event in parse
     ###
-    console.log('you just tried to save an event!')
 
     Event = Parse.Object.extend('Event')
     parseEvent = new Event
@@ -169,8 +199,6 @@ app.controller 'CalendarCtrl', ($scope, $auth, $modal, moment) ->
     ###
     Delete User's events from parse
     ###
-    console.log('you just tried to delete an event!')
-    console.log(event)
 
     ###
     get current user
