@@ -2,74 +2,92 @@ app.controller 'InvitesCtrl', ($scope) ->
   $scope.invites = []
   $scope.accepts = []
   $scope.deleteThing = (index) ->
-    console.log('in fun')
-    if (Parse.User.current()?)
-      Parse.User.current().fetch().then (user) ->
-        console.log('in user fun')
-        entry = $scope.accepts[index]
-        $scope.accepts.splice(index, 1)
-        User = Parse.Object.extend('User')
-        query = new Parse.Query(User)
-        userInvites = user.get 'Invite'
-        result = (item for item in userInvites when item.inviteId != entry.inviteId)
-        console.log(result)
-        user.set 'Invite', result
-        user.save null,
-          error: (error) ->
+
+
+    user = Parse.User.current()
+    userInvites = user.get 'Invite'
+
+    entry = $scope.accepts[index]
+
+    result = (item for item in userInvites when item.inviteId == entry.inviteId)
+
+
+    user.remove('Invite', result[0])
+    user.save(null, {
+      success: () ->
         $scope.$apply()
         updateInvites()
+      error: (error) ->
+        console.error(error)
+    })
+
 
   $scope.acceptInvite = (index) ->
-    if(Parse.User.current()?)
-      Parse.User.current().fetch().then (user) ->
-        entry = $scope.invites[index]
-        $scope.invites.splice(index, 1)
-        User = Parse.Object.extend('User')
-        query = new Parse.Query(User)
-        userInvites = user.get 'Invite'
-        result = (item for item in userInvites when item.inviteId == entry.inviteId)
-        results = (item for item in userInvites when item.inviteId != entry.inviteId)
-        if (result.length != 0)
-          result[0].pending = false
-          results.push result[0]
-        console.log('Element: ' + result[0])
-        console.log(results)
-        user.set 'Invite', results
-        user.save null, (error) ->
-        $scope.$apply()
+
+
+    user = Parse.User.current()
+    userInvites = user.get 'Invite'
+
+    entry = $scope.invites[index]
+
+    result = (item for item in userInvites when item.inviteId == entry.inviteId)
+
+    user.remove('Invite', result[0])
+
+
+
+    newObject = {
+      inviteId: entry.inviteId
+      pending: false
+    }
+    user.save(null,{
+      error: (error) ->
+        console.error(error)
+    })
+
+    user.add('Invite', newObject)
+
+    user.save(null,{
+      error: (error) ->
+        console.error(error)
+    })
+
+    updateInvites()
+
+
 
   $scope.deleteInvite = (index) ->
-    if (Parse.User.current()?)
-      Parse.User.current().fetch().then (user) ->
-        entry = $scope.invites[index]
-        $scope.invites.splice(index, 1)
-        User = Parse.Object.extend('User')
-        query = new Parse.Query(User)
-        userInvites = user.get 'Invite'
-        result = (item for item in userInvites when item.inviteId != entry.inviteId)
-        console.log(result)
-        user.set 'Invite', result
-        user.save null,
-          error: (error) ->
+
+    user = Parse.User.current()
+    userInvites = user.get 'Invite'
+
+    entry = $scope.invites[index]
+
+    result = (item for item in userInvites when item.inviteId == entry.inviteId)
+
+    user.remove('Invite', result[0])
+    user.save(null, {
+      success: () ->
         $scope.$apply()
         updateInvites()
-
-
+      error: (error) ->
+        console.error(error)
+    })
 
   updateInvites = ->
     $scope.invites = []
     $scope.accepts = []
-    if (Parse.User.current()?)
-      Parse.User.current().fetch().then (user) ->
-        userInvites = user.get 'Invite'
-        inviteIds = userInvites.map((invite) -> invite.inviteId)
-        Invite = Parse.Object.extend('Invite')
-        query = new Parse.Query(Invite)
-        query.containedIn('objectId', inviteIds)
+    user = Parse.User.current()
+    userInvites = user.get("Invite")
+    Invite = Parse.Object.extend('Invite')
+    query = new Parse.Query(Invite)
+    for userInvite in userInvites
+      if userInvite.pending
+        query.equalTo('objectId', userInvite.inviteId)
         query.find
-          success: (invites) ->
-            i = 0
-            for invite in invites
+          success: (invite) ->
+            invite = invite[0]
+            if invite
               entry =
                 title: (invite.get 'classTitle') + ' ' + (invite.get 'eventTitle')
                 class: invite.get 'classTitle'
@@ -79,13 +97,25 @@ app.controller 'InvitesCtrl', ($scope) ->
                 time: (invite.get 'eventDate').toTimeString()
                 message: (invite.get 'description')
                 inviteId: invite.id
-              console.log(userInvites[i].pending)
-              if (userInvites[i].pending)
-                $scope.invites.push entry
-              else
-                $scope.accepts.push entry
-              ++i
-            $scope.$apply()
-            return
-          error: ->
+              $scope.invites.push entry
+              $scope.$apply()
+      else
+        query.equalTo('objectId', userInvite.inviteId)
+        query.find
+          success: (invite) ->
+            invite = invite[0]
+            if invite
+              entry =
+                title: (invite.get 'classTitle') + ' ' + (invite.get 'eventTitle')
+                class: invite.get 'classTitle'
+                from: invite.get 'from'
+                location: invite.get 'location'
+                date: (invite.get 'eventDate').toDateString()
+                time: (invite.get 'eventDate').toTimeString()
+                message: (invite.get 'description')
+                inviteId: invite.id
+              $scope.accepts.push entry
+              $scope.$apply()
+    $scope.$apply()
+
   updateInvites()

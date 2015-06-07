@@ -21,8 +21,10 @@ app.controller 'StudyInvCtrl', ($scope, $auth, $alert, $window, ParseUtils) ->
     #newDay = parseInt(date.getDate(), 10) + 1
     #newDate = new Date(date.getFullYear(), date.getMonth(), newDay, newHour , invite.minute, 0,0)
     #newInvite.set('eventDate', newDate)
-    date.setHours(invite.hour)
+    console.log(parseInt(invite.ampm))
+    date.setHours(parseInt(invite.hour) + parseInt(invite.ampm)*12 )
     date.setMinutes(invite.minute)
+    date.setDate(date.getDate()+1)
     newInvite.set('eventDate', date)
 
     # Prints correctly...parse doesn't get hours correctly
@@ -35,6 +37,7 @@ app.controller 'StudyInvCtrl', ($scope, $auth, $alert, $window, ParseUtils) ->
       newInvite.addUnique 'invitedList', user.get 'username'
       newInvite.set 'from', user.get 'username'
       newInvite.save()
+      #window.location.assign("#!/invites")
 
   # Populate classes combo box
   ParseUtils.fetchObject 'Classes', (object) ->
