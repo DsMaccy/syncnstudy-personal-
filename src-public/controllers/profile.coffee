@@ -32,15 +32,15 @@ init = () ->
 app.controller "ProfileCtrl", ($scope,$auth) ->
   #init()
   Parse.User.become($auth.getToken())
-  current = Parse.User.current()
-  changeTitle(current.get('name'))
+  Parse.User.current().fetch().then (current) ->
+    changeTitle(current.get('name'))
 
-  document.getElementById('email').innerHTML = current.get('username')
-  if !current.get('University')
-    current.set('University', 'University of California, San Diego')
-  document.getElementById('uni').innerHTML = current.get('University')
+    document.getElementById('email').innerHTML = current.get('username')
+    if !current.get('University')
+      current.set('University', 'University of California, San Diego')
+    document.getElementById('uni').innerHTML = current.get('University')
 
-  updatePlaceHolders()
+    updatePlaceHolders()
 
 
 
@@ -73,7 +73,7 @@ resetInfo = () ->
   if current.get('Avatar')
     document.getElementById("avatarimg").setAttribute('src', current.get('Avatar').url())
   else
-    document.getElementById('avatarimg').setAttribute('src','http://jeanbaptiste.bayle.free.fr/AVATAR/grey_default_avatar1234375017_opensalon.jpg')
+    document.getElementById('avatarimg').setAttribute('src','http://thesocietypages.org/socimages/files/2009/05/vimeo.jpg')
   document.getElementById('name').value = ""
   document.getElementById('maj').value = ""
   document.getElementById('imgFile').value = ""
@@ -110,6 +110,8 @@ validateImageFile = () ->
 
 # Check if the file name is for an image file
 isImageFile = (name) ->
+  if !name
+    return
   name = name.toLowerCase()
   name = name.substr(name.lastIndexOf('.'))
 
@@ -160,70 +162,71 @@ changeTitle = (name) ->
 
 
 updatePlaceHolders = () ->
-  if current.get('name')
-    document.getElementById('name').setAttribute('placeholder', current.get('name'))
-  if current.get('major')
-    document.getElementById('maj').setAttribute('placeholder', current.get('major'))
-  if current.get('avatar')
-    document.getElementById('imgFile').setAttribute('placeholder', current.get('avatar'))
-  if current.get('AboutMe')
-    document.getElementById('about').setAttribute('placeholder', current.get('AboutMe'))
-  if current.get('Avatar')
-    document.getElementById("avatarimg").setAttribute('src', current.get('Avatar').url())
+  Parse.User.current().fetch().then (current) ->
+    if current.get('name')
+      document.getElementById('name').setAttribute('placeholder', current.get('name'))
+    if current.get('major')
+      document.getElementById('maj').setAttribute('placeholder', current.get('major'))
+    if current.get('avatar')
+      document.getElementById('imgFile').setAttribute('placeholder', current.get('avatar'))
+    if current.get('AboutMe')
+      document.getElementById('about').setAttribute('placeholder', current.get('AboutMe'))
+    if current.get('Avatar')
+      document.getElementById("avatarimg").setAttribute('src', current.get('Avatar').url())
 
 
 updateParse = () ->
-  if document.getElementById('name').value
-    Parse.User.current().set('name', document.getElementById('name').value,
+  Parse.User.current().fetch().then (user) ->
+    current = user
+    if document.getElementById('name').value
+      user.set('name', document.getElementById('name').value,
+        {
+          success: (currentUsr) ->
+            updatePlaceHolders('name', 'name')
+            console.log(current.get('name'))
+          error: (currentUsr, error) ->
+            console.error("There was an issue updating the information")
+        })
+    if document.getElementById('uni').value
+      user.set('University', 'University of California, San Diego',
+        {
+          success: (currentUsr) ->
+            updatePlaceHolders('University', 'uni')
+            console.log(current.get('University'))
+          error: (currentUsr, error) ->
+            console.error("There was an issue updating the information")
+        })
+    if document.getElementById('maj').value
+      user.set('major', document.getElementById('maj').value,
+        {
+          success: (currentUsr) ->
+            updatePlaceHolders('major', 'maj')
+            console.log(current.get('major'))
+          error: (currentUsr, error) ->
+            console.error("There was an issue updating the information")
+        })
+    if document.getElementById('about').value
+      user.set('AboutMe', document.getElementById('about').value,
+        {
+          error: (currentUsr, error) ->
+            console.error("There was an issue updating the information")
+        })
+    if document.getElementById('imgFile').files[0]
+      PFile = new Parse.File(document.getElementById('imgFile').files[0].name,
+        document.getElementById('imgFile').files[0])
+      user.set('Avatar', PFile,
+        {
+          error: (currentUsr, error) ->
+            console.error("There was an issue updating the information")
+        })
+    # TODO: Add the save for "AboutME" and
+    user.save(null,
       {
         success: (currentUsr) ->
-          updatePlaceHolders('name', 'name')
-          console.log(current.get('name'))
+          resetInfo()
+          changeTitle(user.get('name'))
+          updatePlaceHolders()
         error: (currentUsr, error) ->
-          console.error("There was an issue updating the information")
+          console.error("There was an issue saving the data to the server.  We apologize for the inconvenience :(")
+          console.error(error)
       })
-  if document.getElementById('uni').value
-    Parse.User.current().set('University', 'University of California, San Diego',
-      {
-        success: (currentUsr) ->
-          updatePlaceHolders('University', 'uni')
-          console.log(current.get('University'))
-        error: (currentUsr, error) ->
-          console.error("There was an issue updating the information")
-      })
-  if document.getElementById('maj').value
-    Parse.User.current().set('major', document.getElementById('maj').value,
-      {
-        success: (currentUsr) ->
-          updatePlaceHolders('major', 'maj')
-          console.log(current.get('major'))
-        error: (currentUsr, error) ->
-          console.error("There was an issue updating the information")
-      })
-  if document.getElementById('about').value
-    Parse.User.current().set('AboutMe', document.getElementById('about').value,
-      {
-        error: (currentUsr, error) ->
-          console.error("There was an issue updating the information")
-      })
-  if document.getElementById('imgFile').files[0]
-    PFile = new Parse.File(document.getElementById('imgFile').files[0].name,
-      document.getElementById('imgFile').files[0])
-    Parse.User.current().set('Avatar', PFile,
-      {
-        error: (currentUsr, error) ->
-          console.error("There was an issue updating the information")
-      })
-  # TODO: Add the save for "AboutME" and
-  current.save(null,
-    {
-      success: (currentUsr) ->
-        resetInfo()
-        changeTitle(current.get('name'))
-        updatePlaceHolders()
-      error: (currentUsr, error) ->
-        console.error("There was an issue saving the data to the server.  We apologize for the inconvenience :(")
-        console.error(error)
-    })
-
-  current = Parse.User.current()
