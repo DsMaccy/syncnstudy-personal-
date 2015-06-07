@@ -8,7 +8,7 @@ app.controller 'SignupCtrl', ($scope, $auth, $window, Calendar) ->
     .then((response) ->
       $auth.setToken(response.data.token)
       Parse.User.become(response.data.token)
-      $window.location.href = '#!/invites'
+      $window.location.href = '#!/'
       $alert(
         content: 'You have successfully signed up'
         animation: 'fadeZoomFadeDown'

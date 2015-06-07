@@ -4,7 +4,8 @@ html
         .row
           .center-form.panel
             .panel-body
-              h2.text-center Sign Up
+              h2.text-center
+                b.niceandtoasty Sign Up
               form(method='post', ng-submit='signup()', name='signupForm')
                 .form-group.has-feedback(ng-class="{ 'has-error' : signupForm.displayName.$invalid && signupForm.displayName.$dirty }")
                   input.form-control.input-lg(type='text', name='displayName', ng-model='displayName', placeholder='Name', required='', autofocus='')

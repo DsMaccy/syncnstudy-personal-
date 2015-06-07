@@ -2,16 +2,10 @@ app.controller 'InvitesCtrl', ($scope) ->
   $scope.invites = []
   $scope.accepts = []
   $scope.deleteThing = (index) ->
-
-
     user = Parse.User.current()
     userInvites = user.get 'Invite'
-
     entry = $scope.accepts[index]
-
     result = (item for item in userInvites when item.inviteId == entry.inviteId)
-
-
     user.remove('Invite', result[0])
     user.save(null, {
       success: () ->

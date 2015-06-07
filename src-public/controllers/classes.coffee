@@ -93,7 +93,10 @@ sortFunction= (a,b) ->
     return -1
 
 
-
+class Class
+  constructor: (@name, @school, @date, @time, @quarter)->
+    numStudents: 0
+    students: 0
 
 
 
@@ -132,7 +135,6 @@ toggle2= () ->
   newClass = new Class(courseName, schoolName, daysOfWeek, classTime, seasonYear);
   newClass.numStudents = 1;
 
-
   alert "You just added #{courseName} and there is #{newClass.numStudents} student(s)."
   para = document.createElement("P");
   line = document.createElement("HR");
@@ -141,7 +143,6 @@ toggle2= () ->
   para.appendChild(text);
   para.appendChild(line);
   #document.getElementById("userclasses").appendChild(para);
-
 
   #Parse stuff
   Classes = Parse.Object.extend('Classes')
@@ -153,19 +154,14 @@ toggle2= () ->
   classes.set 'time', classTime
   classes.set 'session', seasonYear
   classes.set 'numofstudents', 1
-  classes.save
-    success: ->
-      enrolled = Parse.User.current().relation('enrolledClasses') #go get the relation of curr user to classes
-      enrolled.add classes #add the class in there
-      Parse.User.current().save()
-      location.reload()
-      return
-
-
-
-
-
-
+  classes.save(null, {
+      success: ->
+        enrolled = Parse.User.current().relation('enrolledClasses') #go get the relation of curr user to classes
+        enrolled.add classes #add the class in there
+        Parse.User.current().save()
+        location.reload()
+        return
+    })
 
 
 
