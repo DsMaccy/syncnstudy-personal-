@@ -9,9 +9,11 @@ Parse.Cloud.afterSave 'Invite', (request) ->
   query.find
     success: (users) ->
       for user in users
-        user.addUnique 'Invite', request.object.id
+        user.addUnique 'Invite', {inviteId: request.object.id, pending: true}
+        console.log(user.get 'Invite')
         user.save()
     error: ->
+      console.log('error')
 ###
 Parse.Cloud.beforeSave "Task", (request, response) ->
   request.object.set "random", Math.floor((Math.random() * 100) + 1)
